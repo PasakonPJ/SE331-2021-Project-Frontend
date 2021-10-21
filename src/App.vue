@@ -21,7 +21,39 @@
       </div>
     </div>
   </div>
+  <div id="nav">
+    <nav class="navbar navbar-expand">
+      <ul class="navbar-nav ml-auto">
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <router-link to="/register" class="nav-link">
+            <font-awesome-icon icon="user-plus" /> Sign Up
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link">
+            <font-awesome-icon icon="sign-in-alt" /> Login
+          </router-link>
+        </li>
+         <li class="nav-item" v-if="tood">
+          <a class="nav-link" @click="logout">
+            <font-awesome-icon icon="sign-out-alt" /> LogOut
+          </a>
+        </li>
+      </ul>
+        <!-- <li class="nav-item">
+          <router-link to="/profile" class="nav-link">
+            <font-awesome-icon icon="user" />
+            {{ GStore.currentUser.name }}
+          </router-link>
+        </li> -->
+       
+     
+    </nav>
+  </div>
   <router-view />
+
 </template>
 <script>
 export default {
@@ -35,6 +67,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #5187bd;
 }
 
 #nprogress .bar {
@@ -196,4 +240,5 @@ body {
 #footer {
   margin-top: auto;
 }
+
 </style>

@@ -11,12 +11,24 @@ import patient_api from "@/services/patient_api.js";
 import Global_Store from "@/store";
 import PNotFound from "@/views/404Patient.vue";
 import network_error from "@/views/network_error.vue";
+import Login from "@/views/LoginFrom.vue";
+import Register from '@/views/RegisterForm.vue'
 const routes = [
   {
     path: "/",
     name: "list",
     component: list,
     props: (url) => ({ page: parseInt(url.query.page || 1) }),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path:'/register',
+    name:'Register',
+    component: Register
   },
   {
     path: "/about",

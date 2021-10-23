@@ -36,7 +36,21 @@
                     />
                     <ErrorMessage name="password" class="error-feedback" />
                   </div>
-                    <br>
+                  <div class="form-group" id="text">
+                    <label for="address">Address</label>
+                    <Field name="address" type="text" class="form-control" id="text2"/>
+                    <ErrorMessage name="address" class="error-feedback" />
+                  </div>
+                  <!-- <div class="form-group" id="text">
+                    <label for="address">Address</label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                    >
+                    </textarea>
+                    <ErrorMessage name="address" class="error-feedback" />
+                  </div> -->
+                  <br />
                   <div class="form-group" id="Button">
                     <button
                       class="btn btn-primary btn-block"
@@ -135,6 +149,9 @@ export default {
 }
 #text {
   padding: 0px 100px 0px 100px;
+}
+#text2 {
+  padding: 50px;
 }
 .register {
   background: url("https://raw.githubusercontent.com/PasakonPJ/picture/master/hero-bg.jpg");

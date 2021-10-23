@@ -58,7 +58,7 @@
                   <br />
                   <div class="form-group" id="Button">
                     <button
-                      class="btn btn-primary btn-block"
+                      class="btn btn-outline-info btn-block btn-lg"
                       :disabled="loading"
                     >
                       <span
@@ -149,9 +149,6 @@ export default {
 </script>
 
 <style scoped>
-#Button {
-  padding: 0px 150px 0px 150px;
-}
 #text {
   padding: 0px 100px 0px 100px;
 }

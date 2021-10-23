@@ -26,7 +26,7 @@
                   <Field name="password" type="password" class="form-control" />
                   <ErrorMessage name="password" class="error-feedback" />
                 </div>
-                <br>
+                <br />
                 <div class="form-group" id="Button">
                   <button class="btn btn-primary btn-block" :disabled="loading">
                     <span
@@ -90,11 +90,11 @@ export default {
 </script>
 
 <style scoped>
-#Button{
-    padding: 0px 150px 0px 150px;
+#Button {
+  padding: 0px 150px 0px 150px;
 }
-#text{
-     padding: 0px 100px 0px 100px;
+#text {
+  padding: 0px 100px 0px 100px;
 }
 .register {
   background: url("https://raw.githubusercontent.com/PasakonPJ/picture/master/hero-bg.jpg");

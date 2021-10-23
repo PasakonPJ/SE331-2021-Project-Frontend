@@ -37,16 +37,5 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      dose: [
-        "Not yet",
-        "Got the first dose",
-        "Got the second dose",
-        "Got the third dose",
-        "Got the forth dose",
-      ],
-    };
-  },
 };
 </script>

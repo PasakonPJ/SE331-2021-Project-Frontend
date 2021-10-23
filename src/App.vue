@@ -23,8 +23,7 @@
   </div>
   <div id="nav">
     <nav class="navbar navbar-expand">
-      <ul class="navbar-nav ml-auto">
-      </ul>
+      <ul class="navbar-nav ml-auto"></ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
@@ -36,24 +35,21 @@
             <font-awesome-icon icon="sign-in-alt" /> Login
           </router-link>
         </li>
-         <li class="nav-item" v-if="tood">
+        <li class="nav-item" v-if="tood">
           <a class="nav-link" @click="logout">
             <font-awesome-icon icon="sign-out-alt" /> LogOut
           </a>
         </li>
       </ul>
-        <!-- <li class="nav-item">
+      <!-- <li class="nav-item">
           <router-link to="/profile" class="nav-link">
             <font-awesome-icon icon="user" />
             {{ GStore.currentUser.name }}
           </router-link>
         </li> -->
-       
-     
     </nav>
   </div>
   <router-view />
-
 </template>
 <script>
 export default {
@@ -240,5 +236,4 @@ body {
 #footer {
   margin-top: auto;
 }
-
 </style>

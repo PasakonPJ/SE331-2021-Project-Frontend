@@ -188,8 +188,6 @@ export default {
 #button1 {
   padding: 0 5cm;
 }
-#button2 {
-}
 .link {
   text-decoration: none;
 }

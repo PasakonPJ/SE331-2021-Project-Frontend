@@ -11,8 +11,9 @@ import patient_api from "@/services/patient_api.js";
 import Global_Store from "@/store";
 import PNotFound from "@/views/404Patient.vue";
 import network_error from "@/views/network_error.vue";
-import Login from "@/views/LoginFrom.vue";
+import Login from "@/views/LoginForm.vue";
 import Register from '@/views/RegisterForm.vue'
+import Admin from "@/views/AdminForm.vue";
 const routes = [
   {
     path: "/",
@@ -24,6 +25,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin,
   },
   {
     path:'/register',

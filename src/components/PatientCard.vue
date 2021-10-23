@@ -6,14 +6,24 @@
     <div class="card">
       <div class="card-body">
         <span>
-          <strong>{{ patient.name }} {{ patient.surname }}</strong>
+        
+            {{ patient.username }} 
+            
+            <!-- {{ patient.lastname }} -->
+
+
+    
         </span>
-        <h3 v-if="patient.is_vaccinated">already vaccinated</h3>
-        <h3 v-else>not yet vaccinated</h3>
+        <!-- <h3 v-if="patient.is_vaccinated">
+           -->
+          already vaccinated
+          
+          <!-- </h3> -->
+        <!-- <h3 v-else>not yet vaccinated</h3> -->
         <hr />
-        <span>
+        <!-- <span>
           <p>{{ dose[patient.vaccine_details.length] }}</p>
-        </span>
+        </span> -->
       </div>
     </div>
   </router-link>

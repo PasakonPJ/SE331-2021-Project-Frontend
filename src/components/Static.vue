@@ -13,7 +13,11 @@
         </div>
         <div class="col-6" id="bigbar">
           <div class="row">
-            <div class="col-12">Hospitalized: {{ covid.hospitalized }}</div>
+            <div class="col-12">
+              Hospitalized: 12000
+
+              <!-- {{ covid.hospitalized }} -->
+            </div>
             <div class="col-12">
               <area-chart
                 :data="{
@@ -28,7 +32,11 @@
         </div>
         <div class="col-6" id="bigbar">
           <div class="row">
-            <div class="col-12">Pending: {{ covid.pending }}</div>
+            <div class="col-12">
+              Pending: 50400
+
+              <!-- {{ covid.pending }} -->
+            </div>
             <div class="col-12">
               <area-chart
                 id="pending"
@@ -45,7 +53,12 @@
         <div class="w-100"></div>
         <div class="col-6" id="bigbar">
           <div class="row">
-            <div class="col-12">Total case: {{ covid.total_case }}</div>
+            <div class="col-12">
+              Total case: 500000
+
+              <!-- {{ covid.total_case }}
+               -->
+            </div>
 
             <div class="col-12">
               <area-chart
@@ -61,7 +74,9 @@
         </div>
         <div class="col-6" id="bigbar">
           <div class="row">
-            <div class="col-12">Death: {{ covid.death }}</div>
+            <div class="col-12">
+              Death: 10000
+            </div>
 
             <div class="col-12">
               <area-chart

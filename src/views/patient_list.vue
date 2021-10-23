@@ -1,6 +1,8 @@
 <template>
   <br /><br />
-  <Static :covid="covid" />
+  <Static
+   :covid="covid" 
+  />
   <br /><br />
   <h1>List of People</h1>
   <div class="container">
@@ -67,7 +69,7 @@ export default {
       patients: null,
       total_page: 0,
       size: 6,
-      covid: null,
+      covid: 10,
     };
   },
   created() {
@@ -82,22 +84,22 @@ export default {
           console.log(error);
         });
 
-      api
-        .getData()
-        .then((response) => {
-          this.covid = response.data;
-        })
-        .catch((error) => {
-          if (error.response && error.response.status == 404) {
-            return {
-              name: "404Patient",
-            };
-          } else {
-            return {
-              name: "network_error",
-            };
-          }
-        });
+      // api
+      //   .getData()
+      //   .then((response) => {
+      //     this.covid = response.data;
+      //   })
+        // .catch((error) => {
+        //   if (error.response && error.response.status == 404) {
+        //     return {
+        //       name: "404Patient",
+        //     };
+        //   } else {
+        //     return {
+        //       name: "network_error",
+        //     };
+        //   }
+        // });
     });
   },
   computed: {

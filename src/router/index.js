@@ -12,14 +12,20 @@ import Global_Store from "@/store";
 import PNotFound from "@/views/404Patient.vue";
 import network_error from "@/views/network_error.vue";
 import Login from "@/views/LoginForm.vue";
-import Register from '@/views/RegisterForm.vue'
+import Register from "@/views/RegisterForm.vue";
 import Admin from "@/views/AdminForm.vue";
+import UserRole from "@/views/AdminAddUser.vue";
 const routes = [
   {
     path: "/",
     name: "list",
     component: list,
     props: (url) => ({ page: parseInt(url.query.page || 1) }),
+  },
+  {
+    path: "/userRole",
+    name: "UserRole",
+    component: UserRole,
   },
   {
     path: "/login",
@@ -32,9 +38,9 @@ const routes = [
     component: Admin,
   },
   {
-    path:'/register',
-    name:'Register',
-    component: Register
+    path: "/register",
+    name: "Register",
+    component: Register,
   },
   {
     path: "/about",

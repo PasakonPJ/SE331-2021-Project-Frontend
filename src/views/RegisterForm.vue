@@ -38,7 +38,12 @@
                   </div>
                   <div class="form-group" id="text">
                     <label for="address">Address</label>
-                    <Field name="address" type="text" class="form-control" id="text2"/>
+                    <Field
+                      name="address"
+                      type="text"
+                      class="form-control"
+                      id="text2"
+                    />
                     <ErrorMessage name="address" class="error-feedback" />
                   </div>
                   <!-- <div class="form-group" id="text">

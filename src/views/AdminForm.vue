@@ -8,20 +8,12 @@
       </div>
       <div class="col-4">
         <h1>Add Vaccine</h1>
-        <Card
-        v-for="patient in patients"
-        :key="patient.id"
-        :patient="patient"
-        >
+        <Card v-for="patient in patients" :key="patient.id" :patient="patient">
         </Card>
       </div>
       <div class="col-4">
         <h1>Add Role</h1>
-        <Role
-        v-for="patient in patients"
-        :key="patient.id"
-        :patient="patient"
-        >
+        <Role v-for="patient in patients" :key="patient.id" :patient="patient">
         </Role>
       </div>
     </div>
@@ -37,7 +29,7 @@ export default {
   name: "Admin",
   components: {
     Card,
-    Role
+    Role,
   },
   data() {
     return {
@@ -81,11 +73,11 @@ export default {
 </script>
 
 <style scoped>
-#Button{
-    padding: 0px 150px 0px 150px;
+#Button {
+  padding: 0px 150px 0px 150px;
 }
-#text{
-     padding: 0px 100px 0px 100px;
+#text {
+  padding: 0px 100px 0px 100px;
 }
 .register {
   background: url("https://raw.githubusercontent.com/PasakonPJ/picture/master/hero-bg.jpg");

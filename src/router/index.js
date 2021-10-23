@@ -4,6 +4,7 @@ import About from "../views/About.vue";
 import PatientLayout from "@/views/vaccines/Layout.vue";
 import Dates from "@/views/vaccines/Date.vue";
 import PatientDetails from "@/views/vaccines/PatientDetails.vue";
+import RoleDetails from "@/views/vaccines/RoleDetails.vue";
 import Doctorcomment from "@/views/vaccines/Doctor.vue";
 import KProgress from "nprogress";
 import notFound from "@/views/notFound.vue";
@@ -76,6 +77,12 @@ const routes = [
         name: "PatientDetails",
         props: true,
         component: PatientDetails,
+      },
+      {
+        path: "",
+        name: "RoleDetails",
+        props: true,
+        component: RoleDetails,
       },
       {
         path: "date",

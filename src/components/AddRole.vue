@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="link"
-    :to="{ name: 'PatientDetails', params: { id: patient.id } }"
+    :to="{ name: 'RoleDetails', params: { id: patient.id } }"
   >
     <div class="card">
       <div class="card-body">
@@ -39,13 +39,6 @@ export default {
   },
   data() {
     return {
-      dose: [
-        "Not yet",
-        "Got the first dose",
-        "Got the second dose",
-        "Got the third dose",
-        "Got the forth dose",
-      ],
     };
   },
 };

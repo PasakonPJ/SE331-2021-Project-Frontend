@@ -15,7 +15,7 @@
                 src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                 class="profile-img-card"
               />
-              {{Global_Store.user.firstname}}
+              {{ Global_Store.user.firstname }}
               <Form @submit="handleRegister" :validation-schema="schema">
                 <div v-if="!successful">
                   <div class="form-group" id="text">
@@ -117,33 +117,6 @@ export default {
   inject: ["Global_Store"],
   // eslint-disable-next-line
   data() {
-    const schema = yup.object().shape({
-      firstname: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      lastname: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      username: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      email: yup
-        .string()
-        .required("Email is required!")
-        .email("Email is invalid!")
-        .max(50, "Must be maximum 50 characters!"),
-      password: yup
-        .string()
-        .required("Password is required!")
-        .min(6, "Must be at least 6 characters!")
-        .max(40, "Must be maximum 40 characters!"),
-    });
 
     return {
       successful: false,

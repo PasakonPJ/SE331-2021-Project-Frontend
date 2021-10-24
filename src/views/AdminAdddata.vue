@@ -35,22 +35,22 @@
         <div class="tab-content" id="myTabContent">
           <div class="row register-form">
             <div class="col-md">
+              <div>
+                <span>
+                  <h1 style="display: inline">Name:</h1>
+                  <h3 style="display: inline">
+                    &nbsp;{{ Global_Store.patient.firstname }}
+                    {{ Global_Store.patient.lastname }}
+                    <!-- {{Global_Store.patient.lastname}} -->
+                  </h3>
+                </span>
+              </div>
               <form @submit.prevent="savePaient">
                 <div class="form-group" id="usertext">
                   <!-- <BaseInput v-model="event.title" type="text" label="Title" /> -->
-                  <div>
-                    <span>
-                      <h1 style="display: inline">Name:</h1>
-                      <h3 style="display: inline">
-                        &nbsp;{{ Global_Store.patient.firstname }}
-                        {{ Global_Store.patient.lastname }}
-                        <!-- {{Global_Store.patient.lastname}} -->
-                      </h3>
-                    </span>
-                  </div>
                 </div>
                 <div class="form-group" id="text">
-                  <select>
+                  <select v-model="patients_data.vaccines">
                     <option>pfizer</option>
                     <option>moderna</option>
                     <option>sinovac</option>
@@ -58,7 +58,20 @@
                   </select>
                 </div>
                 <div class="form-group" id="text">
-                  <BaseSelect :options="patients" label="Select an Doctor" />
+                  <!-- <BaseSelect
+                    v-model="patients_data.doctor"
+                    :options="doctors"
+                    label="Select an Doctor"
+                  /> -->
+                  <select v-model="patients_data.doctor">
+                    <option
+                      v-for="option in doctors"
+                      :value="option.id"
+                      :key="option.id"
+                    >
+                      {{option.firstname}}
+                    </option>
+                  </select>
                 </div>
                 <br />
                 <div class="form-group" id="Button">
@@ -74,10 +87,10 @@
   <br />
 </template>
 <script>
-import PatientService from "@/services/patient_api.js";
 // import UploadImages from 'vue-upload-drop-images'
 import api from "@/services/patient_api.js";
 import { watchEffect } from "@vue/runtime-core";
+// import axios from "axios";
 export default {
   props: ["id"],
   inject: ["Global_Store"],
@@ -87,27 +100,24 @@ export default {
 
   data() {
     return {
-      patients: null,
+      doctors: null,
+      
+      
+      patients_data: {
+        vaccines: "a",
+        doctor: 1,
+      },
+
+
+
+
+
       event: {
         category: "",
         title: "",
         description: "",
         location: "",
         organizer: { id: "1", name: "baby" },
-        vaccines: [
-          {
-            vaccine_name: "pfizer",
-          },
-          {
-            vaccine_name: "moderna",
-          },
-          {
-            vaccine_name: "sinovac",
-          },
-          {
-            vaccine_name: "Astra",
-          },
-        ],
         imageUrls: [],
       },
       files: [],
@@ -118,7 +128,7 @@ export default {
       api
         .get_Doctors()
         .then((response) => {
-          this.patients = response.data;
+          this.doctors = response.data;
           this.total_page = response.headers["x-total-count"];
         })
         .catch((error) => {
@@ -129,13 +139,18 @@ export default {
 
   methods: {
     savePaient() {
-      PatientService.save_vaccine_doctor(this.id)
-        .then(() => {
-          console.log(this.id)
-        })
-        .catch(() => {
-          this.$router.push("NetworkError");
-        });
+     api.save_vaccine_doctor(this.id,this.patients_data)
+
+     
+      // axios
+      //   .post("https://jsonplaceholder.typicode.com/posts", this.patients_data)
+      //   // .save_vaccine_doctor(this.id,this.patients_data)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     },
     // handleImages(files) {
     //   this.files = files

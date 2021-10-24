@@ -28,7 +28,10 @@
                 </div>
                 <br />
                 <div class="form-group" id="Button">
-                  <button class="btn btn-outline-info btn-block btn-lg" :disabled="loading">
+                  <button
+                    class="btn btn-outline-info btn-block btn-lg"
+                    :disabled="loading"
+                  >
                     <span
                       v-show="loading"
                       class="spinner-border spinner-border-sm"

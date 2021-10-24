@@ -1,12 +1,12 @@
 <template>
   <router-link
     class="link"
-    :to="{ name: 'RoleDetails', params: { id: patient.id } }"
+    :to="{ name: 'RoleDetails', params: { id: userRole.id } }"
   >
     <div class="card">
       <div class="card-body">
         <span>
-          <strong>{{ patient.name }} {{ patient.surname }}</strong>
+          <strong>{{ userRole.firstname }} {{ userRole.lastname }}</strong>
         </span>
       </div>
     </div>
@@ -32,7 +32,7 @@
 <script>
 export default {
   props: {
-    patient: {
+    userRole: {
       type: Object,
       required: true,
     },

@@ -63,7 +63,7 @@
                 height="200"
               />
               <div class="mt-3">
-                <h4>{{ patient.name }} {{ patient.surname }}</h4>
+                <h4>{{ patient.firstname }} {{ patient.lastname }}</h4>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
             <li id="hide">
               <span>✉: </span
               ><a href="" id="li1"
-                ><u>{{ patient.name }}@gmail.com </u></a
+                ><u>{{ patient.firstname }}@gmail.com </u></a
               >
             </li>
           </ul>
@@ -88,7 +88,7 @@
                 <h6 class="mb-0">Fullname</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ patient.name }} {{ patient.surname }}
+                {{ patient.firstname }} {{ patient.lastname }}
               </div>
             </div>
             <hr />
@@ -97,7 +97,7 @@
                 <h6 class="mb-0">Email</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ patient.name }}@gmail.com
+                {{ patient.firstname }}@gmail.com
               </div>
             </div>
             <hr />
@@ -112,7 +112,7 @@
               <div class="col-sm-3">
                 <h6 class="mb-0">Age</h6>
               </div>
-              <div class="col-sm-9 text-secondary">{{ patient.age }}</div>
+              <div class="col-sm-9 text-secondary"> 16 </div>
             </div>
             <hr />
             <div class="row">
@@ -120,7 +120,8 @@
                 <h6 class="mb-0">Hometown</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{ patient.home_town }}
+                <!-- {{ patient.home_town }} -->
+                Nan chiang mai
               </div>
             </div>
             <hr />

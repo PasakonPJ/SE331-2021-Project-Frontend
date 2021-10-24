@@ -15,7 +15,7 @@ import network_error from "@/views/network_error.vue";
 import Login from "@/views/LoginForm.vue";
 import Register from "@/views/RegisterForm.vue";
 import Admin from "@/views/AdminForm.vue";
-import UserRole from "@/views/AdminAddUser.vue";
+import AddDV from "@/views/AdminAdddata.vue";
 const routes = [
   {
     path: "/",
@@ -24,9 +24,9 @@ const routes = [
     props: (url) => ({ page: parseInt(url.query.page || 1) }),
   },
   {
-    path: "/userRole",
-    name: "UserRole",
-    component: UserRole,
+    path: "/addDV",
+    name: "AddDV",
+    component: AddDV,
   },
   {
     path: "/login",

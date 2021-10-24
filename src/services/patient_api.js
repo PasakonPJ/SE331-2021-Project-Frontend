@@ -18,4 +18,8 @@ export default {
   getData() {
     return patient_api.get("/over_all");
   },
+  get_User() {
+    return patient_api.get("/users");
+  }
+  
 };

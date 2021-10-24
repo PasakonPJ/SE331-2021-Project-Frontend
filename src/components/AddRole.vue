@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="link"
-    :to="{ name: 'RoleDetails', params: { id: userRole.id } }"
+    :to="{ name: 'ChangeRole', params: { id: userRole.id } }"
   >
     <div class="card">
       <div class="card-body">

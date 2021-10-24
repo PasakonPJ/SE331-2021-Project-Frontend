@@ -16,7 +16,31 @@ import Login from "@/views/LoginForm.vue";
 import Register from "@/views/RegisterForm.vue";
 import Admin from "@/views/AdminForm.vue";
 import AddDV from "@/views/AdminAdddata.vue";
+import ChangeRole from "@/views/ChangeRole.vue";
 const routes = [
+  {
+    path: "/changerole",
+    name: "ChangeRole",
+    component: ChangeRole,
+    beforeEnter: (to) => {
+      return patient_api
+        .get_User_id(to.params.id)
+        .then((response) => {
+          Global_Store.user = response.data;
+        })
+        .catch((error) => {
+          if (error.response && error.response.status == 404) {
+            return {
+              name: "404Patient",
+            };
+          } else {
+            return {
+              name: "network_error",
+            };
+          }
+        });
+    }
+  },
   {
     path: "/",
     name: "list",
@@ -27,6 +51,25 @@ const routes = [
     path: "/addDV",
     name: "AddDV",
     component: AddDV,
+    props: true,
+    beforeEnter: (to) => {
+      return patient_api
+        .get_patient_id(to.params.id)
+        .then((response) => {
+          Global_Store.patient = response.data;
+        })
+        .catch((error) => {
+          if (error.response && error.response.status == 404) {
+            return {
+              name: "404Patient",
+            };
+          } else {
+            return {
+              name: "network_error",
+            };
+          }
+        });
+    },
   },
   {
     path: "/login",

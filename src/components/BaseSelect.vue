@@ -9,7 +9,7 @@
         $emit('update:modelValue', $event.target.value);
       },
     }" -->
-  
+
     <option
       v-for="option in options"
       :value="option.id"

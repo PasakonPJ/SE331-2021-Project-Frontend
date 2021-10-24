@@ -6,19 +6,15 @@
     <div class="card">
       <div class="card-body">
         <span>
-        
-            {{ patient.username }} 
-            
-            <!-- {{ patient.lastname }} -->
+          {{ patient.username }}
 
-
-    
+          <!-- {{ patient.lastname }} -->
         </span>
         <!-- <h3 v-if="patient.is_vaccinated">
            -->
-          already vaccinated
-          
-          <!-- </h3> -->
+        already vaccinated
+
+        <!-- </h3> -->
         <!-- <h3 v-else>not yet vaccinated</h3> -->
         <hr />
         <!-- <span>

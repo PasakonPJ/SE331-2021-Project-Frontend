@@ -12,14 +12,22 @@ export default {
   get_all_patient(page, limit) {
     return patient_api.get("/patients?_limit=" + limit + "&_page=" + page);
   },
+  save_vaccine_doctor(id){
+    return patient_api.post("/patients/vaccine/"+id);
+  },
   get_patient_id(id) {
     return patient_api.get("/patients/" + id);
+  },
+  get_Doctors(){
+    return patient_api.get("/doctors");
   },
   getData() {
     return patient_api.get("/over_all");
   },
   get_User() {
     return patient_api.get("/users");
+  },
+  get_User_id(id) {
+    return patient_api.get("/user/"+id);
   }
-  
 };

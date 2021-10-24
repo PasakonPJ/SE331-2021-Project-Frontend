@@ -41,16 +41,21 @@
                   <div>
                     <span>
                       <h1 style="display: inline">Name:</h1>
-                      <h3 style="display: inline">Peter pan</h3>
+                      <h3 style="display: inline">
+                        &nbsp;{{ Global_Store.patient.firstname }}
+                        {{ Global_Store.patient.lastname }}
+                        <!-- {{Global_Store.patient.lastname}} -->
+                      </h3>
                     </span>
                   </div>
                 </div>
                 <div class="form-group" id="text">
-                  <BaseSelect
-                    :options="organizers"
-                    v-model="event.organizer.id"
-                    label="Select an Vaccine"
-                  />
+                  <select>
+                    <option>pfizer</option>
+                    <option>moderna</option>
+                    <option>sinovac</option>
+                    <option>Astra</option>
+                  </select>
                 </div>
                 <div class="form-group" id="text">
                   <BaseSelect :options="patients" label="Select an Doctor" />
@@ -69,12 +74,13 @@
   <br />
 </template>
 <script>
-// import PatientService from '@/services/patient_api.js'
+import PatientService from "@/services/patient_api.js";
 // import UploadImages from 'vue-upload-drop-images'
 import api from "@/services/patient_api.js";
 import { watchEffect } from "@vue/runtime-core";
 export default {
-  inject: ["GStore"],
+  props: ["id"],
+  inject: ["Global_Store"],
   components: {
     // UploadImages
   },
@@ -88,6 +94,20 @@ export default {
         description: "",
         location: "",
         organizer: { id: "1", name: "baby" },
+        vaccines: [
+          {
+            vaccine_name: "pfizer",
+          },
+          {
+            vaccine_name: "moderna",
+          },
+          {
+            vaccine_name: "sinovac",
+          },
+          {
+            vaccine_name: "Astra",
+          },
+        ],
         imageUrls: [],
       },
       files: [],
@@ -96,7 +116,7 @@ export default {
   created() {
     watchEffect(() => {
       api
-        .get_all_patient(1, 3)
+        .get_Doctors()
         .then((response) => {
           this.patients = response.data;
           this.total_page = response.headers["x-total-count"];
@@ -104,60 +124,23 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-
-      api
-        .getData()
-        .then((response) => {
-          this.covid = response.data;
-        })
-        .catch((error) => {
-          if (error.response && error.response.status == 404) {
-            return {
-              name: "404Patient",
-            };
-          } else {
-            return {
-              name: "network_error",
-            };
-          }
-        });
     });
   },
 
-  // methods: {
-  //   savePaient() {
-  //     console.log(this.files)
-
-  //     Promise.all(
-  //       this.files.map((file) => {
-  //         return EventService.uploadFile(file)
-  //       })
-  //     )
-
-  //     then((response) => {
-  //       this.event.imageUrls = response.map((r) => r.data)
-  //       PatientService.saveEvent(this.event)
-  //         .then((response) => {
-  //           console.log(response)
-  //           this.$router.push({
-  //             name: 'EventLayout',
-  //             params: { id: response.data.id }
-  //           })
-  //           this.GStore.flashMessage =
-  //             'You are successfully add a new event for ' + response.data.title
-  //           setTimeout(() => {
-  //             this.GStore.flashMessage = ''
-  //           }, 3000)
-  //         })
-  //         .catch(() => {
-  //           this.$router.push('NetworkError')
-  //         })
-  //     })
-  //   },
-  //   handleImages(files) {
-  //     this.files = files
-  //   }
-  // }
+  methods: {
+    savePaient() {
+      PatientService.save_vaccine_doctor(this.id)
+        .then(() => {
+          console.log(this.id)
+        })
+        .catch(() => {
+          this.$router.push("NetworkError");
+        });
+    },
+    // handleImages(files) {
+    //   this.files = files
+    // }
+  },
 };
 </script>
 <style>

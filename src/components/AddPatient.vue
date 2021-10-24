@@ -1,12 +1,9 @@
 <template>
-  <router-link
-    class="link"
-    :to="{ name: 'PatientDetails', params: { id: patient.id } }"
-  >
+  <router-link class="link" :to="{ name: 'AddDV', params: { id: patient.id } }">
     <div class="card">
       <div class="card-body">
         <span>
-          <strong>{{ patient.username }} </strong>
+          <strong>{{ patient.firstname }}  {{ patient.lastname }}</strong>
         </span>
       </div>
     </div>

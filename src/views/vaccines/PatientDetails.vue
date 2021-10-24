@@ -112,7 +112,7 @@
               <div class="col-sm-3">
                 <h6 class="mb-0">Age</h6>
               </div>
-              <div class="col-sm-9 text-secondary"> 16 </div>
+              <div class="col-sm-9 text-secondary">16</div>
             </div>
             <hr />
             <div class="row">

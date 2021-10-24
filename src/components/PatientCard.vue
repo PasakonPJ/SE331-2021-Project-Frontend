@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-body">
         <span>
-          {{ patient.username }}
+         <p> {{ patient.firstname }}  {{ patient.lastname }}</p>
 
           <!-- {{ patient.lastname }} -->
         </span>

@@ -8,13 +8,19 @@
       </div>
       <div class="col-4">
         <h1>Add Vaccine</h1>
-        <Card v-for="patient in patients" :key="patient.id" :patient="patient">
-        </Card>
+        <Card
+          v-for="patient in patients"
+          :key="patient.id"
+          :patient="patient"
+        />
       </div>
       <div class="col-4">
         <h1>Add Role</h1>
-        <Role v-for="patient in patients" :key="patient.id" :patient="patient">
-        </Role>
+        <Role
+          v-for="userRole in userRoles"
+          :key="userRole.id"
+          :userRole="userRole"
+        />
       </div>
     </div>
   </div>
@@ -33,6 +39,7 @@ export default {
   },
   data() {
     return {
+      userRoles: null,
       patients: null,
       total_page: 0,
       size: 6,
@@ -42,7 +49,7 @@ export default {
   created() {
     watchEffect(() => {
       api
-        .get_all_patient(this.page, this.size)
+        .get_all_patient(1, this.size)
         .then((response) => {
           this.patients = response.data;
           this.total_page = response.headers["x-total-count"];
@@ -50,22 +57,13 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-
       api
-        .getData()
+        .get_User()
         .then((response) => {
-          this.covid = response.data;
+          this.userRoles = response.data;
         })
         .catch((error) => {
-          if (error.response && error.response.status == 404) {
-            return {
-              name: "404Patient",
-            };
-          } else {
-            return {
-              name: "network_error",
-            };
-          }
+          console.log(error);
         });
     });
   },

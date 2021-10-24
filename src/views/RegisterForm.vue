@@ -36,7 +36,7 @@
                     />
                     <ErrorMessage name="password" class="error-feedback" />
                   </div>
-                  <div class="form-group" id="text">
+                  <!-- <div class="form-group" id="text">
                     <label for="address">Address</label>
                     <Field
                       name="address"
@@ -44,7 +44,18 @@
                       class="form-control"
                       id="text2"
                     />
+                    
                     <ErrorMessage name="address" class="error-feedback" />
+                  </div> -->
+                  <div class="form-group" id="text">
+                    <label for="firstname">Firstname</label>
+                    <Field name="firstname" type="text" class="form-control" />
+                    <ErrorMessage name="firstname" class="error-feedback" />
+                  </div>
+                  <div class="form-group" id="text">
+                    <label for="lastname">Lastname</label>
+                    <Field name="lastname" type="text" class="form-control" />
+                    <ErrorMessage name="lastname" class="error-feedback" />
                   </div>
                   <!-- <div class="form-group" id="text">
                     <label for="address">Address</label>
@@ -58,7 +69,7 @@
                   <br />
                   <div class="form-group" id="Button">
                     <button
-                      class="btn btn-outline-info btn-block btn-lg"
+                      class="btn btn-outline-info btn-block"
                       :disabled="loading"
                     >
                       <span
@@ -84,13 +95,15 @@
       </div>
     </div>
   </div>
+  <br />
+  <br />
 </template>
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 // eslint-disable-next-line
-// import AuthService from '@/services/AuthService.js'
+import AuthService from '@/services/AuthService.js'
 
 export default {
   name: "Register",
@@ -99,10 +112,20 @@ export default {
     Field,
     ErrorMessage,
   },
+  inject: ["Global_Store"],
   // eslint-disable-next-line
-  inject: ["GStore"],
   data() {
     const schema = yup.object().shape({
+      firstname: yup
+        .string()
+        .required("Username is required!")
+        .min(3, "Must be at least 3 characters!")
+        .max(20, "Must be maximum 20 characters!"),
+      lastname: yup
+        .string()
+        .required("Username is required!")
+        .min(3, "Must be at least 3 characters!")
+        .max(20, "Must be maximum 20 characters!"),
       username: yup
         .string()
         .required("Username is required!")
@@ -121,7 +144,7 @@ export default {
     });
 
     return {
-      //   successful: false,
+        successful: false,
       loading: false,
       message: "",
       schema,
@@ -129,20 +152,19 @@ export default {
   },
   mounted() {
     // if (this.GStore.currentUser) {
-    //   this.$router.push('/event')
+      // this.$router.push('/list')
     // }
   },
   methods: {
     // eslint-disable-next-line
-    handleRegister() {
-      // user
-      //   AuthService.saveUser(user)
-      //   this.message = ''
-      //   //   this.successful = true
-      //   this.loading = true
-      //   this.$router.push({
-      //     name: 'EventList'
-      //   })
+    handleRegister(user) {
+        AuthService.saveUser(user)
+        this.message = ''
+          this.successful = true
+        this.loading = true
+        // this.$router.push({
+        //   name: 'EventList'
+        // })
     },
   },
 };

@@ -74,9 +74,7 @@
         </div>
         <div class="col-6" id="bigbar">
           <div class="row">
-            <div class="col-12">
-              Death: 10000
-            </div>
+            <div class="col-12">Death: 10000</div>
 
             <div class="col-12">
               <area-chart

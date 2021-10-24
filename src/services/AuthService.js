@@ -1,57 +1,53 @@
-
-import apiClient from '@/services/AxiosClient.js'
-import GStore from '@/store'
+import apiClient from "@/services/AxiosClient.js";
+import GStore from "@/store";
 export default {
   login(user) {
     return apiClient
-      .post('/auth', {
+      .post("/auth", {
         username: user.username,
-        password: user.password
+        password: user.password,
       })
       .then((response) => {
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
-        GStore.currentUser = response.data.user
-        return Promise.resolve(response.data)
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        GStore.currentUser = response.data.user;
+        return Promise.resolve(response.data);
       })
       .catch((error) => {
-        return Promise.reject(error)
-      })
+        return Promise.reject(error);
+      });
   },
   logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    GStore.currentUser = null
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    GStore.currentUser = null;
   },
-  saveUser(user){
-    return apiClient
-    .post('/signup', {
+  saveUser(user) {
+    return apiClient.post("/signup", {
       username: user.username,
       email: user.email,
       password: user.password,
       firstname: user.firstname,
       lastname: user.lastname,
-    })
-      
+    });
   },
   getUser() {
-    return JSON.parse(localStorage.getItem('user'))
+    return JSON.parse(localStorage.getItem("user"));
   },
 
   hasRoles(roles) {
     if (GStore.currentUser && roles) {
       let containRoles = GStore.currentUser.authorities.filter((authority) =>
         roles.includes(authority)
-      )
+      );
 
       if (containRoles.length > 0) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     } else {
-      return false
+      return false;
     }
-  }
-
-}
+  },
+};

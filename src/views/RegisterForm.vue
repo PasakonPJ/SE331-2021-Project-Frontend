@@ -144,7 +144,7 @@ export default {
     });
 
     return {
-        successful: false,
+      successful: false,
       loading: false,
       message: "",
       schema,
@@ -152,19 +152,19 @@ export default {
   },
   mounted() {
     // if (this.GStore.currentUser) {
-      // this.$router.push('/list')
+    // this.$router.push('/list')
     // }
   },
   methods: {
     // eslint-disable-next-line
     handleRegister(user) {
-        AuthService.saveUser(user)
-        this.message = ''
-          this.successful = true
-        this.loading = true
-        // this.$router.push({
-        //   name: 'EventList'
-        // })
+      AuthService.saveUser(user);
+      this.message = "";
+      this.successful = true;
+      this.loading = true;
+      // this.$router.push({
+      //   name: 'EventList'
+      // })
     },
   },
 };

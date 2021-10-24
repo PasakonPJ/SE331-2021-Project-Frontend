@@ -23,8 +23,7 @@
   </div>
   <div id="nav">
     <nav class="navbar navbar-expand">
-      <ul class="navbar-nav ml-auto"></ul>
-      <ul class="navbar-nav ml-auto">
+      <ul v-if="!Global_Store.currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
             <font-awesome-icon icon="user-plus" /> Sign Up
@@ -35,7 +34,15 @@
             <font-awesome-icon icon="sign-in-alt" /> Login
           </router-link>
         </li>
-        <li class="nav-item" v-if="tood">
+      </ul>
+      <ul v-if="Global_Store.currentUser" class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <router-link to="/profile" class="nav-link">
+            <font-awesome-icon icon="user" />
+            {{ Global_Store.currentUser.firstname }}
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="logout">
           <a class="nav-link" @click="logout">
             <font-awesome-icon icon="sign-out-alt" /> LogOut
           </a>
@@ -52,7 +59,23 @@
   <router-view />
 </template>
 <script>
+import AuthService from "@/services/AuthService.js";
 export default {
+  inject: ["Global_Store"], // <----
+  computed: {
+    currentUser() {
+      return localStorage.getItem("user");
+    },
+    isAdmin() {
+      return AuthService.hasRoles("ROLE_ADMIN");
+    },
+  },
+  methods: {
+    logout() {
+      AuthService.logout();
+      this.$router.go();
+    },
+  },
   components: {},
 };
 </script>

@@ -53,10 +53,7 @@
                   />
                 </div>
                 <div class="form-group" id="text">
-                  <BaseSelect
-                    :options="patients"
-                    label="Select an Doctor"
-                  />
+                  <BaseSelect :options="patients" label="Select an Doctor" />
                 </div>
                 <br />
                 <div class="form-group" id="Button">
@@ -84,7 +81,7 @@ export default {
 
   data() {
     return {
-      patients:null,
+      patients: null,
       event: {
         category: "",
         title: "",

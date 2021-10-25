@@ -42,9 +42,9 @@ export default {
     return {};
   },
   methods: {
-    forio2(){
+    forio2() {
       console.log(this.userRole.id);
-    }
+    },
   },
 };
 </script>

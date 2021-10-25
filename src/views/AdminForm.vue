@@ -79,11 +79,11 @@ export default {
 </script>
 
 <style scoped>
-h1{
+h1 {
   color: #fff;
   text-shadow: 2px 2px 4px #000000;
 }
-span{
+span {
   color: #fff;
   text-shadow: 1px 1px 1px #000000;
 }

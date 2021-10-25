@@ -10,62 +10,64 @@
         <div class="tab-content" id="myTabContent">
           <div class="row register-form">
             <div class="col-md">
-              <img
-                id="profile-img"
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                class="profile-img-card"
-              />
               <Form @submit="handleRegister" :validation-schema="schema">
                 <div v-if="!successful">
-                  <div class="form-group" id="text">
-                    <label for="username">Username</label>
-                    <Field name="username" type="text" class="form-control" />
-                    <ErrorMessage name="username" class="error-feedback" />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <Field
+                          name="username"
+                          type="text"
+                          class="form-control"
+                        />
+                        <ErrorMessage name="username" class="error-feedback" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="password">Password</label>
+                        <Field
+                          name="password"
+                          type="password"
+                          class="form-control"
+                        />
+                        <ErrorMessage name="password" class="error-feedback" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="firstname">Firstname</label>
+                        <Field
+                          name="firstname"
+                          type="text"
+                          class="form-control"
+                        />
+                        <ErrorMessage name="firstname" class="error-feedback" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="lastname">Lastname</label>
+                        <Field
+                          name="lastname"
+                          type="text"
+                          class="form-control"
+                        />
+                        <ErrorMessage name="lastname" class="error-feedback" />
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group" id="text">
                     <label for="email">Email</label>
                     <Field name="email" type="email" class="form-control" />
                     <ErrorMessage name="email" class="error-feedback" />
                   </div>
-                  <div class="form-group" id="text">
-                    <label for="password">Password</label>
-                    <Field
-                      name="password"
-                      type="password"
-                      class="form-control"
-                    />
-                    <ErrorMessage name="password" class="error-feedback" />
-                  </div>
-                  <!-- <div class="form-group" id="text">
-                    <label for="address">Address</label>
-                    <Field
-                      name="address"
-                      type="text"
-                      class="form-control"
-                      id="text2"
-                    />
-                    
-                    <ErrorMessage name="address" class="error-feedback" />
-                  </div> -->
-                  <div class="form-group" id="text">
-                    <label for="firstname">Firstname</label>
-                    <Field name="firstname" type="text" class="form-control" />
-                    <ErrorMessage name="firstname" class="error-feedback" />
-                  </div>
-                  <div class="form-group" id="text">
-                    <label for="lastname">Lastname</label>
-                    <Field name="lastname" type="text" class="form-control" />
-                    <ErrorMessage name="lastname" class="error-feedback" />
-                  </div>
-                  <!-- <div class="form-group" id="text">
-                    <label for="address">Address</label>
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                    >
-                    </textarea>
-                    <ErrorMessage name="address" class="error-feedback" />
-                  </div> -->
+                  <label for="image">Image</label>
+                  <UploadImages />
+
                   <br />
                   <div class="form-group" id="Button">
                     <button
@@ -102,12 +104,14 @@
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+import UploadImages from "vue-upload-drop-images";
 // eslint-disable-next-line
-import AuthService from '@/services/AuthService.js'
+import AuthService from "@/services/AuthService.js";
 
 export default {
   name: "Register",
   components: {
+    UploadImages,
     Form,
     Field,
     ErrorMessage,
@@ -158,13 +162,16 @@ export default {
   methods: {
     // eslint-disable-next-line
     handleRegister(user) {
-      AuthService.saveUser(user);
-      this.message = "";
-      this.successful = true;
-      this.loading = true;
-      // this.$router.push({
-      //   name: 'EventList'
-      // })
+      AuthService.saveUser(user)
+        .then(() => {
+          this.message = "";
+          this.successful = true;
+          this.loading = true;
+          this.$router.push("/login");
+        })
+        .catch(() => {
+          this.$router.push("NetworkError");
+        });
     },
   },
 };
@@ -180,6 +187,7 @@ export default {
 .register {
   background: url("https://raw.githubusercontent.com/PasakonPJ/picture/master/hero-bg.jpg");
   margin-top: 3%;
+  background-repeat: no-repeat;
   padding: 3%;
 }
 .register-left {

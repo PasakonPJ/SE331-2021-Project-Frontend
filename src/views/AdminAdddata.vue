@@ -138,7 +138,11 @@ export default {
 
   methods: {
     savePaient() {
-      api.save_vaccine_doctor(this.id, this.patients_data);
+      api.save_vaccine_doctor(this.id, this.patients_data)
+      .then(() => {
+          console.log(this.id)
+          this.$router.push("/admin");
+        })
 
     },
     // handleImages(files) {

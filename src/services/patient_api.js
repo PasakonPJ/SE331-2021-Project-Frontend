@@ -30,7 +30,6 @@ export default {
     return patient_api.get("/patients/doctor");
   },
   get_Doctors(){
-
     return patient_api.get("/doctors");
   },
   getData() {

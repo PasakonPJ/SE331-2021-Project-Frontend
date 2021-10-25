@@ -42,6 +42,12 @@
             {{ Global_Store.currentUser.firstname }}
           </router-link>
         </li>
+        <li v-if="isAdmin" class="nav-item">
+          <router-link to="/admin" class="nav-link">
+            <font-awesome-icon icon="user" />
+            Manage
+          </router-link>
+        </li>
         <li class="nav-item" v-if="logout">
           <a class="nav-link" @click="logout">
             <font-awesome-icon icon="sign-out-alt" /> LogOut

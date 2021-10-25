@@ -1,12 +1,12 @@
 <template>
-  <div class="container register">
+  <div class="container-fluid register">
     <div class="row">
-      <div class="col-4 register-left">
+      <div class="col-3 register-left">
         <img src="../assets/chickgoya.jpg" alt="" />
         <h3>Welcome</h3>
         <p>Doctor !!!</p>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <h1>Add Vaccine</h1>
         <Card
           v-for="patient in patients"
@@ -14,7 +14,15 @@
           :patient="patient"
         />
       </div>
-      <div class="col-4">
+      <div class="col-3">
+        <h1>More Doses</h1>
+        <Card
+          v-for="patient in patients"
+          :key="patient.id"
+          :patient="patient"
+        />
+      </div>
+      <div class="col-3">
         <h1>Add Role</h1>
         <Role
           v-for="userRole in userRoles"
@@ -71,6 +79,14 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+}
+span{
+  color: #fff;
+  text-shadow: 1px 1px 1px #000000;
+}
 #Button {
   padding: 0px 150px 0px 150px;
 }

@@ -2,8 +2,9 @@
   <br /><br />
   <Static :covid="covid" />
   <br /><br />
+  <div v-if="isAdmin">
   <h1>List of People</h1>
-  <div class="container">
+  <div  class="container">
     <hr />
     <br />
     <div class="row">
@@ -38,13 +39,16 @@
       </router-link>
     </div>
   </div>
+  </div>
   <div class="footer">
     <footerLayout />
   </div>
 </template>
 <script>
+import AuthService from "@/services/AuthService.js";
 import api from "@/services/patient_api.js";
 import card from "@/components/PatientCard.vue";
+
 import Static from "@/components/Static.vue";
 import { watchEffect } from "@vue/runtime-core";
 import footerLayout from "@/views/footer.vue";
@@ -59,12 +63,14 @@ export default {
 
   components: {
     card,
+
     Static,
     footerLayout,
   },
   data() {
     return {
       patients: null,
+      patientsdoc: null,
       total_page: 0,
       size: 6,
       covid: 10,
@@ -87,6 +93,15 @@ export default {
     has_next_page() {
       let total = Math.ceil(this.total_page / this.size);
       return this.page < total;
+    },
+    currentUser() {
+      return localStorage.getItem("user");
+    },
+    isAdmin() {
+      return AuthService.hasRoles("ROLE_ADMIN");
+    },
+    isDoctor() {
+      return AuthService.hasRoles("ROLE_DOCTOR");
     },
   },
 };

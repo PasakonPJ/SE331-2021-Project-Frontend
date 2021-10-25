@@ -22,9 +22,10 @@ const routes = [
     path: "/changerole",
     name: "ChangeRole",
     component: ChangeRole,
+    props: true,
     beforeEnter: (to) => {
       return patient_api
-        .get_User_id(to.params.id)
+        .get_user_id(to.params.id)
         .then((response) => {
           Global_Store.user = response.data;
         })

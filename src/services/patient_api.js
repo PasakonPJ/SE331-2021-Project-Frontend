@@ -7,6 +7,7 @@ const patient_api = axios.create({
     "Content-Type": "application/json",
   },
 });
+//    method(id_panient,(json = id doctor,topic,recommend))
 
 export default {
   get_all_patient(page, limit) {
@@ -30,9 +31,7 @@ export default {
     return patient_api.get("/patients/doctor");
   },
 
-
   get_Doctors() {
-
     return patient_api.get("/doctors");
   },
   getData() {
@@ -44,6 +43,9 @@ export default {
 
   get_user_id(id) {
     return patient_api.get("/user/" + id);
+  },
+  get_painet_comment(id){
+    return patient_api.get("/comment/" + id);
   },
   saveRole(user, id) {
     return patient_api.put("/user/" + id, {

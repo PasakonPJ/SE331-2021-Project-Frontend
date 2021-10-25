@@ -22,6 +22,8 @@
 <script>
 import Doctorform from "@/components/Doctorform.vue";
 import Doctorcommentlist from "@/components/Doctorcommentlist.vue";
+import { watchEffect } from "@vue/runtime-core";
+import api from "@/services/patient_api.js";
 export default {
   name: "Doctorcomment",
   inject: ["Global_Store"],
@@ -35,11 +37,27 @@ export default {
   data() {
     return {
       comments: [],
+      identifind: this.patient.id,
+      comments2: []
     };
+  },
+  created() {
+    watchEffect(() => {
+      api
+        .get_painet_comment(this.identifind)
+        .then((response) => {
+          this.comments = response.data;
+          this.total_page = response.headers["x-total-count"];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   },
   methods: {
     addcomment(allcomment) {
       setTimeout(() => {
+        console.log(allcomment)
         this.comments.push(allcomment);
         this.$flashMessage.remove("ko");
       }, 1200);

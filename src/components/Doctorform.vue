@@ -52,7 +52,16 @@
                 <div class="col-sm-2"></div>
                 <label class="col-sm-2 col-form-label">Name:</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" v-model="name" />
+                  <!-- <input type="text" class="form-control" v-model="name" /> -->
+                  <select v-model="doctor.firstname">
+                    <option
+                      v-for="option in doctors"
+                      :value="option.id"
+                      :key="option.id"
+                    >
+                      {{ option.firstname }}
+                    </option>
+                  </select>
                 </div>
               </div>
               <div class="form-group row" id="recommend">
@@ -83,6 +92,55 @@
     </div>
   </div>
 </template>
+<script>
+import { watchEffect } from "@vue/runtime-core";
+import api from "@/services/patient_api.js";
+export default {
+  data() {
+    return {
+      topic: "",
+      doctor: [
+        {
+          firstname: "",
+        },
+      ],
+      review: "",
+      recommend: "",
+      doctors: null,
+    };
+  },
+  created() {
+    watchEffect(() => {
+      api
+        .get_Doctors()
+        .then((response) => {
+          this.doctors = response.data;
+          this.total_page = response.headers["x-total-count"];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  },
+  methods: {
+    onSubmit() {
+      if (this.topic === "" || this.firstname === "" || this.recommend === "") {
+        alert("Comment is incomplete. Please full");
+        return;
+      }
+      let doctorcomment = {
+        topic: this.topic,
+        firstname : this.doctor.firstname,
+        recommend: this.recommend,
+      };
+      this.$emit("comment-submited", doctorcomment);
+      this.topic = "";
+      this.this.doctor.firstname = "";
+      this.recommend = "";
+    },
+  },
+};
+</script>
 <style scoped>
 .link {
   text-decoration: none;
@@ -180,32 +238,4 @@
   margin-top: 0.5cm;
 }
 </style>
-<script>
-export default {
-  data() {
-    return {
-      topic: "",
-      name: "",
-      review: "",
-      recommend: "",
-    };
-  },
-  methods: {
-    onSubmit() {
-      if (this.topic === "" || this.name === "" || this.recommend === "") {
-        alert("Comment is incomplete. Please full");
-        return;
-      }
-      let doctorcomment = {
-        topic: this.topic,
-        name: this.name,
-        recommend: this.recommend,
-      };
-      this.$emit("comment-submited", doctorcomment);
-      this.topic = "";
-      this.name = "";
-      this.recommend = "";
-    },
-  },
-};
-</script>
+

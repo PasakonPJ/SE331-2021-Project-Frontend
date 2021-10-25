@@ -3,42 +3,46 @@
   <Static :covid="covid" />
   <br /><br />
   <div v-if="isAdmin">
-  <h1>List of People</h1>
-  <div  class="container">
-    <hr />
-    <br />
-    <div class="row">
-      <card
-        class="col-sm-4"
-        v-for="patient in patients"
-        :key="patient.id"
-        :patient="patient"
-      >
-      </card>
+    <h1>List of People</h1>
+    <div class="container">
+      <hr />
+      <br />
+      <div class="row">
+        <card
+          class="col-sm-4"
+          v-for="patient in patients"
+          :key="patient.id"
+          :patient="patient"
+        >
+        </card>
+      </div>
     </div>
-  </div>
-  <br /><br />
+    <br /><br />
 
-  <div class="list">
-    <div class="page_change">
-      <router-link
-        :to="{ name: 'list', query: { page: page - 1 } }"
-        rel="prev"
-        id="prev"
-        v-if="page != 1"
-      >
-        <button type="button" class="btn btn-outline-dark btn-lg">Prev</button>
-      </router-link>
-      <router-link
-        :to="{ name: 'list', query: { page: page + 1 } }"
-        rel="next"
-        id="next"
-        v-if="has_next_page"
-      >
-        <button type="button" class="btn btn-outline-dark btn-lg">Next</button>
-      </router-link>
+    <div class="list">
+      <div class="page_change">
+        <router-link
+          :to="{ name: 'list', query: { page: page - 1 } }"
+          rel="prev"
+          id="prev"
+          v-if="page != 1"
+        >
+          <button type="button" class="btn btn-outline-dark btn-lg">
+            Prev
+          </button>
+        </router-link>
+        <router-link
+          :to="{ name: 'list', query: { page: page + 1 } }"
+          rel="next"
+          id="next"
+          v-if="has_next_page"
+        >
+          <button type="button" class="btn btn-outline-dark btn-lg">
+            Next
+          </button>
+        </router-link>
+      </div>
     </div>
-  </div>
   </div>
   <div class="footer">
     <footerLayout />

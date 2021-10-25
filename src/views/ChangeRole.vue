@@ -11,6 +11,7 @@
           <div class="row register-form">
             <div class="col-md">
 
+
               <form @submit.prevent="saveRole">
                 <div class="form-group" id="usertext">
                   <div>
@@ -20,6 +21,7 @@
                       <h3 style="display: inline">
                       </h3>
                     </span>
+
                   </div>
                 </div>
                 <div class="form-group" id="text">
@@ -47,11 +49,14 @@
   <br />
 </template>
 <script>
+
 import PatientService from "@/services/patient_api.js";
+
 export default {
   props: ["id"],
   inject: ["Global_Store"],
   data() {
+
     return {
       patients: null,
       role: [],
@@ -63,6 +68,7 @@ export default {
           role_name: "ROLE_PATIENT"
         }
       ]
+
     };
   },
   methods: {

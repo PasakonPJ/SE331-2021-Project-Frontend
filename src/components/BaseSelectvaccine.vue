@@ -11,16 +11,14 @@
     }" -->
 
     <option
-    
       v-for="option in options"
       :value="option.id"
       :key="option.id"
       :selected="option.id === modelValue.id"
     >
-  
-       {{ option.vaccine_name }}
-   
-     <!-- <div v-if="option.vaccine.vaccine_name">
+      {{ option.vaccine_name }}
+
+      <!-- <div v-if="option.vaccine.vaccine_name">
         {{ option.vaccine.vaccine_name }}
      </div> -->
     </option>

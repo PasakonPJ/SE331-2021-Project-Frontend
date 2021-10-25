@@ -12,16 +12,25 @@ export default {
   get_all_patient(page, limit) {
     return patient_api.get("/patients?_limit=" + limit + "&_page=" + page);
   },
-  save_vaccine_doctor(id){
-    return patient_api.post("/patients/vaccine/"+id);
+  get_paient_doctor() {
+    return patient_api.get("/patients/doctor");
+  },
+  save_vaccine_doctor(A, data) {
+    console.log(data);
+    return patient_api.post("/patients/vaccine/" + A, {
+      id: data.doctor,
+      vaccine: data.vaccines,
+    });
   },
   get_patient_id(id) {
     return patient_api.get("/patients/" + id);
   },
+
   get_patient_doctor(){
     return patient_api.get("/patients/doctor");
   },
   get_Doctors(){
+
     return patient_api.get("/doctors");
   },
   getData() {
@@ -30,6 +39,7 @@ export default {
   get_User() {
     return patient_api.get("/users");
   },
+
   get_user_id(id) {
     return patient_api.get("/user/"+ id);
   },
@@ -37,5 +47,6 @@ export default {
     return patient_api.put("/user/" + id, {
       role: [user]
     });
+
   },
 };

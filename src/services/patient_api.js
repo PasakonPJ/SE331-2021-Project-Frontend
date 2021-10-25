@@ -29,10 +29,16 @@ export default {
   patient_login(user) {
     return patient_api.get("/patients/profile/"+user);
   },
+  doctor_login(user) {
+    return patient_api.get("/doctors/profile/"+user);
+  },
+  ///doctor of patient
   get_patient_doctor() {
     return patient_api.get("/patients/doctor");
   },
-
+  get_doctor(id){
+    return patient_api.get("/doctors/" + id);
+  },
   get_Doctors() {
     return patient_api.get("/doctors");
   },
@@ -54,4 +60,10 @@ export default {
       role: [user],
     });
   },
+
+  // doctor_login(user) {
+  //   return patient_api.put("/user/" + id, {
+  //     role: [user],
+  //   });
+  // },
 };

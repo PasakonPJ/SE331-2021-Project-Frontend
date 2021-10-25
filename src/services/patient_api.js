@@ -26,10 +26,13 @@ export default {
     return patient_api.get("/patients/" + id);
   },
 
-  get_patient_doctor(){
+  get_patient_doctor() {
     return patient_api.get("/patients/doctor");
   },
-  get_Doctors(){
+
+
+  get_Doctors() {
+
     return patient_api.get("/doctors");
   },
   getData() {
@@ -40,12 +43,11 @@ export default {
   },
 
   get_user_id(id) {
-    return patient_api.get("/user/"+ id);
+    return patient_api.get("/user/" + id);
   },
   saveRole(user, id) {
     return patient_api.put("/user/" + id, {
-      role: [user]
+      role: [user],
     });
-
   },
 };

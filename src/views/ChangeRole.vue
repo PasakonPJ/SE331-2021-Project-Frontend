@@ -10,22 +10,18 @@
         <div class="tab-content" id="myTabContent">
           <div class="row register-form">
             <div class="col-md">
-
-
               <form @submit.prevent="saveRole">
                 <div class="form-group" id="usertext">
                   <div>
                     <span>
                       <h1 style="display: inline">Name:</h1>
                       {{ Global_Store.user.firstname }}
-                      <h3 style="display: inline">
-                      </h3>
+                      <h3 style="display: inline"></h3>
                     </span>
-
                   </div>
                 </div>
                 <div class="form-group" id="text">
-                  <select v-model="role"> 
+                  <select v-model="role">
                     <option
                       v-for="option in roles"
                       :value="option.role_name"
@@ -49,33 +45,30 @@
   <br />
 </template>
 <script>
-
 import PatientService from "@/services/patient_api.js";
 
 export default {
   props: ["id"],
   inject: ["Global_Store"],
   data() {
-
     return {
       patients: null,
       role: [],
       roles: [
         {
-          role_name: "ROLE_DOCTOR"
+          role_name: "ROLE_DOCTOR",
         },
         {
-          role_name: "ROLE_PATIENT"
-        }
-      ]
-
+          role_name: "ROLE_PATIENT",
+        },
+      ],
     };
   },
   methods: {
     saveRole() {
       PatientService.saveRole(this.role, this.id)
         .then(() => {
-          console.log(this.id)
+          console.log(this.id);
           this.$router.push("/admin");
         })
         .catch(() => {

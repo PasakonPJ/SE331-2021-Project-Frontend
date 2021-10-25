@@ -25,14 +25,14 @@ export default {
   get_patient_id(id) {
     return patient_api.get("/patients/" + id);
   },
-
+  patient_login(user) {
+    return patient_api.get("/patients/profile/"+user);
+  },
   get_patient_doctor() {
     return patient_api.get("/patients/doctor");
   },
 
-
   get_Doctors() {
-
     return patient_api.get("/doctors");
   },
   getData() {

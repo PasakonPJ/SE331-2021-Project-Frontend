@@ -56,9 +56,13 @@
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
+import api from "@/services/patient_api.js";
 import AuthService from "@/services/AuthService.js";
+import Global_Store from "@/store";
 import * as yup from "yup";
 export default {
+  inject: [Global_Store],
+
   name: "Login",
   components: {
     Form,
@@ -74,13 +78,28 @@ export default {
       loading: false,
       message: "",
       schema,
+      biguser: null,
     };
   },
   methods: {
     handleLogin(user) {
       AuthService.login(user)
-        .then(() => {
-          this.$router.push({ name: "list" });
+        .then((response) => {
+          console.log(response.user.authorities[0]);
+          if (response.user.authorities[0] === "ROLE_PATIENT") {
+            api
+              .patient_login(Global_Store.currentUser.username)
+              .then((response) => {
+                console.log(response.data);
+                this.biguser = response.data;
+                this.$router.push({
+                  name: "PatientDetails",
+                  params: { id: this.biguser.id },
+                });
+              });
+          } else {
+            this.$router.push({ name: "list" });
+          }
         })
         .catch(() => {
           this.message = "could not login";

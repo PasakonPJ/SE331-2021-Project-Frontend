@@ -28,6 +28,7 @@
     "vue-flash-message": "^0.7.2",
     "vue-progressbar": "^0.7.5",
     "vue-router": "^4.0.0-0",
+    "vue-upload-drop-images": "^1.0.7",
     "vuex": "^4.0.0-0",
     "yup": "^0.32.11"
   },

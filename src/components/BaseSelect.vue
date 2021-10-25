@@ -16,7 +16,7 @@
       :key="option.id"
       :selected="option.id === modelValue.id"
     >
-      {{ option.id }} 
+      {{ option.id }}
 
       <!-- <div v-if="option.vaccine.vaccine_name">
         {{ option.vaccine.vaccine_name }}

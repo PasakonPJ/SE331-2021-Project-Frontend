@@ -49,7 +49,7 @@ export default {
   created() {
     watchEffect(() => {
       api
-        .get_all_patient(1, this.size)
+        .get_paient_doctor()
         .then((response) => {
           this.patients = response.data;
           this.total_page = response.headers["x-total-count"];

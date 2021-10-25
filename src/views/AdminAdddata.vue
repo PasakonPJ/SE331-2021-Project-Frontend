@@ -49,27 +49,26 @@
                 <div class="form-group" id="usertext">
                   <!-- <BaseInput v-model="event.title" type="text" label="Title" /> -->
                 </div>
+
                 <div class="form-group" id="text">
-                  <select v-model="patients_data.vaccines">
-                    <option>pfizer</option>
-                    <option>moderna</option>
-                    <option>sinovac</option>
-                    <option>Astra</option>
-                  </select>
-                </div>
-                <div class="form-group" id="text">
-                  <!-- <BaseSelect
-                    v-model="patients_data.doctor"
-                    :options="doctors"
-                    label="Select an Doctor"
-                  /> -->
                   <select v-model="patients_data.doctor">
                     <option
                       v-for="option in doctors"
                       :value="option.id"
                       :key="option.id"
                     >
-                      {{option.firstname}}
+                      {{ option.firstname }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group" id="text">
+                  <select v-model="patients_data.vaccines">
+                    <option
+                      v-for="opt in All_vaccine"
+                      :value="opt.vaccine_name"
+                      :key="opt.id"
+                    >
+                      {{ opt.vaccine_name }}
                     </option>
                   </select>
                 </div>
@@ -101,26 +100,26 @@ export default {
   data() {
     return {
       doctors: null,
-      
-      
+
       patients_data: {
         vaccines: "a",
         doctor: 1,
       },
 
-
-
-
-
-      event: {
-        category: "",
-        title: "",
-        description: "",
-        location: "",
-        organizer: { id: "1", name: "baby" },
-        imageUrls: [],
-      },
-      files: [],
+      All_vaccine: [
+        {
+          vaccine_name: "pfizer",
+        },
+        {
+          vaccine_name: "moderna",
+        },
+        {
+          vaccine_name: "astra",
+        },
+        {
+          vaccine_name: "sinovac",
+        },
+      ],
     };
   },
   created() {
@@ -139,18 +138,8 @@ export default {
 
   methods: {
     savePaient() {
-     api.save_vaccine_doctor(this.id,this.patients_data)
+      api.save_vaccine_doctor(this.id, this.patients_data);
 
-     
-      // axios
-      //   .post("https://jsonplaceholder.typicode.com/posts", this.patients_data)
-      //   // .save_vaccine_doctor(this.id,this.patients_data)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
     },
     // handleImages(files) {
     //   this.files = files

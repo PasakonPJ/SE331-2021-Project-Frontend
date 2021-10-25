@@ -102,7 +102,7 @@
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
+
 // eslint-disable-next-line
 import AuthService from '@/services/AuthService.js'
 
@@ -122,7 +122,7 @@ export default {
       successful: false,
       loading: false,
       message: "",
-      schema,
+     
     };
   },
   mounted() {

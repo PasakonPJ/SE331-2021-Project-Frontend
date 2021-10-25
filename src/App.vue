@@ -7,12 +7,12 @@
     group="ko"
     style="text-align: center"
   />
-  <div class="menu-wrap">
+  <div class="menu-wrap" v-if="!isROLE_PATIENT">
     <input type="checkbox" class="toggler" />
     <div class="hamburger"><div></div></div>
     <div class="menu">
       <div>
-        <div>
+        <div   >
           <ul>
             <li><router-link to="/">Home</router-link></li>
             <li><router-link to="/about">About</router-link></li>
@@ -75,11 +75,15 @@ export default {
     isAdmin() {
       return AuthService.hasRoles("ROLE_ADMIN");
     },
+    isROLE_PATIENT() {
+      return AuthService.hasRoles("ROLE_PATIENT");
+    },
   },
   methods: {
     logout() {
       AuthService.logout();
-      this.$router.go();
+      // this.$router.go();
+      this.$router.push("/login");
     },
   },
   components: {},

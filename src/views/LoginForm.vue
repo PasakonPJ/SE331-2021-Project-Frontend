@@ -85,16 +85,30 @@ export default {
     handleLogin(user) {
       AuthService.login(user)
         .then((response) => {
-          console.log(response.user.authorities[0]);
+          // console.log(response.user.authorities[0]);
           if (response.user.authorities[0] === "ROLE_PATIENT") {
             api
               .patient_login(Global_Store.currentUser.username)
               .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.biguser = response.data;
                 this.$router.push({
                   name: "PatientDetails",
                   params: { id: this.biguser.id },
+                });
+              });
+          } else if (response.user.authorities[0] === "ROLE_DOCTOR") {
+            console.log("tood");
+            api
+              .doctor_login(Global_Store.currentUser.username)
+              .then((response) => {
+                console.log(response.data);
+                this.biguser = response.data;
+                Global_Store.doctor = response.data;
+                console.log(this.biguser.id);
+                this.$router.push({
+                  name: "list",
+                  params: { id: this.biguser.id }
                 });
               });
           } else {

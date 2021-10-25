@@ -17,6 +17,7 @@ import Register from "@/views/RegisterForm.vue";
 import Admin from "@/views/AdminForm.vue";
 import AddDV from "@/views/AdminAdddata.vue";
 import ChangeRole from "@/views/ChangeRole.vue";
+import Profile from "@/views/Profile.vue";
 const routes = [
   {
     path: "/changerole",
@@ -41,6 +42,11 @@ const routes = [
           }
         });
     },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
   },
   {
     path: "/",

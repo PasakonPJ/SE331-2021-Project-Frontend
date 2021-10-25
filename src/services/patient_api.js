@@ -36,9 +36,21 @@ export default {
   get_patient_doctor() {
     return patient_api.get("/patients/doctor");
   },
+
   get_doctor(id){
     return patient_api.get("/doctors/" + id);
   },
+  
+  doctor_patient(username) {
+    return patient_api.post("/doctors/mypatient",{
+      username: username
+    });
+  },
+
+  doctor_patientt(username) {
+    return patient_api.get("/doctors/" + username)
+  },
+
   get_Doctors() {
     return patient_api.get("/doctors");
   },

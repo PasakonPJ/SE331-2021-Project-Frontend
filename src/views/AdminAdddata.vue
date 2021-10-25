@@ -146,6 +146,7 @@ export default {
         .catch(() => {
           this.$router.push("NetworkError");
         });
+
     },
     // handleImages(files) {
     //   this.files = files

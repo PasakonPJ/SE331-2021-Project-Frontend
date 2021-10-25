@@ -1,13 +1,12 @@
 <template>
   <router-link
     class="link"
-    @click="forio2"
-    :to="{ name: 'ChangeRole', params: { id: userRole.id } }"
+    :to="{ name: 'PatientDetails', params: { id: pd.id } }"
   >
     <div class="card">
       <div class="card-body">
         <span>
-          <strong>{{ userRole.firstname }} {{ userRole.lastname }}</strong>
+          <p>{{ pd.firstname }} {{ pd.lastname }}</p>
         </span>
       </div>
     </div>
@@ -16,7 +15,8 @@
 <style scoped>
 .card {
   border: 1px solid black;
-  padding: 10px;
+  width: max-content;
+  padding: 30px;
   margin: 10px 42px;
   cursor: grab;
 }
@@ -33,18 +33,21 @@
 <script>
 export default {
   props: {
-    userRole: {
+    pd: {
       type: Object,
       required: true,
     },
   },
   data() {
-    return {};
-  },
-  methods: {
-    forio2(){
-      console.log(this.userRole.id);
-    }
+    return {
+      dose: [
+        "Not yet",
+        "Got the first dose",
+        "Got the second dose",
+        "Got the third dose",
+        "Got the forth dose",
+      ],
+    };
   },
 };
 </script>

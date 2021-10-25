@@ -18,6 +18,9 @@ export default {
   get_patient_id(id) {
     return patient_api.get("/patients/" + id);
   },
+  get_patient_doctor(){
+    return patient_api.get("/patients/doctor");
+  },
   get_Doctors(){
     return patient_api.get("/doctors");
   },
@@ -27,7 +30,12 @@ export default {
   get_User() {
     return patient_api.get("/users");
   },
-  get_User_id(id) {
-    return patient_api.get("/user/"+id);
-  }
+  get_user_id(id) {
+    return patient_api.get("/user/"+ id);
+  },
+  saveRole(user, id) {
+    return patient_api.put("/user/" + id, {
+      role: [user]
+    });
+  },
 };

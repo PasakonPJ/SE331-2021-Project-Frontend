@@ -10,86 +10,34 @@
         <div class="tab-content" id="myTabContent">
           <div class="row register-form">
             <div class="col-md">
-              <img
-                id="profile-img"
-                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                class="profile-img-card"
-              />
-              {{Global_Store.user.firstname}}
-              <Form @submit="handleRegister" :validation-schema="schema">
-                <div v-if="!successful">
-                  <div class="form-group" id="text">
-                    <label for="username">Username</label>
-                    <Field name="username" type="text" class="form-control" />
-                    <ErrorMessage name="username" class="error-feedback" />
-                  </div>
-                  <div class="form-group" id="text">
-                    <label for="email">Email</label>
-                    <Field name="email" type="email" class="form-control" />
-                    <ErrorMessage name="email" class="error-feedback" />
-                  </div>
-                  <div class="form-group" id="text">
-                    <label for="password">Password</label>
-                    <Field
-                      name="password"
-                      type="password"
-                      class="form-control"
-                    />
-                    <ErrorMessage name="password" class="error-feedback" />
-                  </div>
-                  <!-- <div class="form-group" id="text">
-                    <label for="address">Address</label>
-                    <Field
-                      name="address"
-                      type="text"
-                      class="form-control"
-                      id="text2"
-                    />
-                    
-                    <ErrorMessage name="address" class="error-feedback" />
-                  </div> -->
-                  <div class="form-group" id="text">
-                    <label for="firstname">Firstname</label>
-                    <Field name="firstname" type="text" class="form-control" />
-                    <ErrorMessage name="firstname" class="error-feedback" />
-                  </div>
-                  <div class="form-group" id="text">
-                    <label for="lastname">Lastname</label>
-                    <Field name="lastname" type="text" class="form-control" />
-                    <ErrorMessage name="lastname" class="error-feedback" />
-                  </div>
-                  <!-- <div class="form-group" id="text">
-                    <label for="address">Address</label>
-                    <textarea
-                      class="form-control"
-                      id="exampleFormControlTextarea1"
-                    >
-                    </textarea>
-                    <ErrorMessage name="address" class="error-feedback" />
-                  </div> -->
-                  <br />
-                  <div class="form-group" id="Button">
-                    <button
-                      class="btn btn-outline-info btn-block"
-                      :disabled="loading"
-                    >
-                      <span
-                        v-show="loading"
-                        class="spinner-border spinner-border-sm"
-                      ></span>
-                      Sign Up
-                    </button>
+
+              <form @submit.prevent="saveRole">
+                <div class="form-group" id="usertext">
+                  <div>
+                    <span>
+                      <h1 style="display: inline">Name:</h1>
+                      {{ Global_Store.user.firstname }}
+                      <h3 style="display: inline">
+                      </h3>
+                    </span>
                   </div>
                 </div>
-              </Form>
-
-              <div
-                v-if="message"
-                class="alert"
-                :class="successful ? 'alert-success' : 'alert-danger'"
-              >
-                {{ message }}
-              </div>
+                <div class="form-group" id="text">
+                  <select v-model="role"> 
+                    <option
+                      v-for="option in roles"
+                      :value="option.role_name"
+                      :key="option.id"
+                    >
+                      {{ option.role_name }}
+                    </option>
+                  </select>
+                </div>
+                <br />
+                <div class="form-group" id="Button">
+                  <button class="btn btn-primary btn-block">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -97,87 +45,54 @@
     </div>
   </div>
   <br />
-  <br />
 </template>
-
 <script>
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
-// eslint-disable-next-line
-import AuthService from '@/services/AuthService.js'
-
+import PatientService from "@/services/patient_api.js";
 export default {
   props: ["id"],
-  name: "Register",
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
   inject: ["Global_Store"],
-  // eslint-disable-next-line
   data() {
-    const schema = yup.object().shape({
-      firstname: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      lastname: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      username: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      email: yup
-        .string()
-        .required("Email is required!")
-        .email("Email is invalid!")
-        .max(50, "Must be maximum 50 characters!"),
-      password: yup
-        .string()
-        .required("Password is required!")
-        .min(6, "Must be at least 6 characters!")
-        .max(40, "Must be maximum 40 characters!"),
-    });
-
     return {
-      successful: false,
-      loading: false,
-      message: "",
-      schema,
+      patients: null,
+      role: [],
+      roles: [
+        {
+          role_name: "ROLE_DOCTOR"
+        },
+        {
+          role_name: "ROLE_PATIENT"
+        }
+      ]
     };
   },
-  mounted() {
-    // if (this.GStore.currentUser) {
-    // this.$router.push('/list')
-    // }
-  },
   methods: {
-    // eslint-disable-next-line
-    handleRegister(user) {
-      AuthService.saveUser(user);
-      this.message = "";
-      this.successful = true;
-      this.loading = true;
-      // this.$router.push({
-      //   name: 'EventList'
-      // })
+    saveRole() {
+      PatientService.saveRole(this.role, this.id)
+        .then(() => {
+          console.log(this.id)
+          this.$router.push("/admin");
+        })
+        .catch(() => {
+          this.$router.push("NetworkError");
+        });
     },
   },
 };
 </script>
-
-<style scoped>
+<style>
+#Button {
+  padding: 0px 100px 0px 100px;
+  margin-left: 150px;
+  width: 50%;
+  text-align: center;
+}
 #text {
   padding: 0px 100px 0px 100px;
 }
-#text2 {
-  padding: 50px;
+#usertext {
+  text-align: left;
+  padding-bottom: 10px;
+  color: rgba(7, 12, 29, 0.394);
 }
 .register {
   background: url("https://raw.githubusercontent.com/PasakonPJ/picture/master/hero-bg.jpg");
@@ -313,5 +228,234 @@ label {
 }
 .error-feedback {
   color: rgb(8, 114, 167);
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+small {
+  font-size: 80%;
+}
+.eyebrow {
+  font-size: 20px;
+}
+.-text-primary {
+  color: rgb(8, 114, 167);
+}
+.-text-base {
+  color: rgb(8, 114, 167);
+}
+.-text-error {
+  color: rgb(8, 114, 167);
+}
+.-text-gray {
+  color: rgba(0, 0, 0, 0.5);
+}
+.-shadow {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.13);
+}
+
+button,
+label,
+input,
+optgroup,
+select,
+textarea {
+  display: inline-flex;
+  font-family: "Open sans", sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+button,
+input {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: none;
+}
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 2px solid color rgb(8, 114, 167);
+}
+label {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+input,
+textarea {
+  box-sizing: border-box;
+  border: solid 1px rgba(0, 0, 0, 0.4);
+}
+input.error,
+select.error {
+  margin-bottom: 0;
+}
+input + p.errorMessage {
+  margin-bottom: 24px;
+}
+textarea {
+  width: 100%;
+  overflow: auto;
+  font-size: 20px;
+}
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  margin-right: 0.5rem;
+}
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+input,
+[type="text"],
+[type="number"],
+[type="search"],
+[type="password"] {
+  height: 52px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 20px;
+}
+input,
+[type="text"]:focus,
+[type="number"]:focus,
+[type="search"]:focus,
+[type="password"]:focus {
+  border-color: color rgb(8, 114, 167);
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+[hidden] {
+  display: none;
+}
+.error {
+  border: 1px color rgb(8, 114, 167);
+}
+select {
+  width: 100%;
+  height: 52px;
+  padding: 0 24px 0 10px;
+  vertical-align: middle;
+  background: #fff
+    url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E")
+    no-repeat right 12px center;
+  background-size: 8px 10px;
+  border: solid 1px rgba(0, 0, 0, 0.4);
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+select:focus {
+  border-color: color rgb(8, 114, 167);
+  outline: 0;
+}
+select:focus::ms-value {
+  color: #000;
+  background: #fff;
+}
+select::ms-expand {
+  opacity: 0;
+}
+.field {
+  margin-bottom: 24px;
+}
+.error {
+  border: 1px solid red;
+}
+.errorMessage {
+  color: red;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 40px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s linear;
+}
+.button:hover {
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
+  box-shadow: 0 7px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.button:active {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  box-shadow: none;
+}
+.button:focus {
+  outline: 0;
+}
+.button:disabled {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  box-shadow: none;
+}
+.button + .button {
+  margin-left: 1em;
+}
+.button.-fill-gradient {
+  background: linear-gradient(to right, #16c0b0, #84cf6a);
+  color: #ffffff;
+}
+.button.-fill-gray {
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+.button.-size-small {
+  height: 32px;
+}
+.button.-icon-right {
+  text-align: left;
+  padding: 0 20px;
+}
+.button.-icon-right > .icon {
+  margin-left: 10px;
+}
+.button.-icon-left {
+  text-align: right;
+  padding: 0 20px;
+}
+.button.-icon-left > .icon {
+  margin-right: 10px;
+}
+.button.-icon-center {
+  padding: 0 20px;
 }
 </style>

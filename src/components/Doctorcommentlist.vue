@@ -6,10 +6,10 @@
     crossorigin="anonymous"
   />
   <ul style="list-style-type: none">
-    <li>
+    <li v-if="com">
       <b> The Doctor Topic:</b>{{ com.topic }}
       <br />
-      <b> From doctor:</b>{{ com.name }}
+      <!-- <b> From doctor:</b>{{ com.doctor.firstname }} -->
       <br />
       <b> Recommend:</b>{{ com.recommend }}
       <br />

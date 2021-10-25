@@ -95,6 +95,8 @@ span {
 }
 .register {
   background: url("https://raw.githubusercontent.com/PasakonPJ/picture/master/hero-bg.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
   margin-top: 3%;
   padding: 3%;
 }
@@ -103,30 +105,7 @@ span {
   color: #fff;
   margin-top: 4%;
 }
-.register-left input {
-  border: none;
-  border-radius: 1.5rem;
-  padding: 2%;
-  width: 60%;
-  background: #f8f9fa;
-  font-weight: bold;
-  color: #383d41;
-  margin-top: 30%;
-  margin-bottom: 3%;
-  cursor: pointer;
-}
-.register-right {
-  background: #f8f9fa;
-  border-top-left-radius: 10% 50%;
-  border-bottom-left-radius: 10% 50%;
-}
-.register-left img {
-  margin-top: 15%;
-  margin-bottom: 5%;
-  width: 75%;
-  -webkit-animation: mover 2s infinite alternate;
-  animation: mover 1s infinite alternate;
-}
+
 @-webkit-keyframes mover {
   0% {
     transform: translateY(0);
@@ -143,13 +122,13 @@ span {
     transform: translateY(-20px);
   }
 }
-.register-left p {
+/* .register-left p {
   font-weight: lighter;
   padding: 12%;
   margin-top: -9%;
-}
+} */
 .register .register-form {
-  padding: 10%;
+  padding: 5%;
 }
 .btnRegister {
   float: right;

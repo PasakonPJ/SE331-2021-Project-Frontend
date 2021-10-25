@@ -1,9 +1,9 @@
 <template>
-  <div class="card" v-for="x in patient.vaccine_details" :key="x.id">
+  <div class="card" v-for="x in patients" :key="x.id">
     <div class="card-body">
       <ul id="hide">
-        <li><b>Vaccine_name:</b> {{ x.vaccine_name }}</li>
-        <li><b>Appointment:</b> {{ x.vaccinated_date }}</li>
+        <li><b>Vaccine_name:</b> {{ x[0].vaccine.vaccineName }}</li>
+        <li><b>Appointment:</b> {{ x[0].vaccine.vaccinatedDate }}</li>
         <!-- <li ><b>Total_dose:</b> {{ xcount++ }}</li> -->
       </ul>
     </div>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ["patient"],
+  props: ["patients"],
 };
 </script>
 <style scoped>

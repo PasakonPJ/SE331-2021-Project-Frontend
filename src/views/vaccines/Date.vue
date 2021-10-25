@@ -85,14 +85,19 @@
                     <div id="tex">VACCINES</div>
                   </div>
                   <div class="col-sm-5">
-                    <div id="tex">
-                      Total Dose: {{ patient.vaccine_details.length }}
-                    </div>
+                    <div id="tex">Total Dose: {{ patient.vaccine.length }}</div>
                   </div>
                 </div>
                 <div>
-                  <Vaccinedetail :patient="Global_Store.patient" />
-                  <!-- <Vaccinedetail :patient="data" /> -->
+                  <div class="card" v-for="x in patient.vaccine" :key="x.id">
+                    <div class="card-body">
+                      <ul id="hide">
+                        <li><b>Vaccine_name:</b> {{ x.vaccineName }}</li>
+                        <li><b>Appointment:</b> {{ x.vaccinatedDate }}</li>
+                        <!-- <li ><b>Total_dose:</b> {{ xcount++ }}</li> -->
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <br />
               </div>
@@ -104,12 +109,12 @@
   </div>
 </template>
 <script>
-import Vaccinedetail from "@/components/Vaccinedetail.vue";
+// import Vaccinedetail from "@/components/Vaccinedetail.vue";
 export default {
   props: ["patient"],
   inject: ["Global_Store"],
   components: {
-    Vaccinedetail,
+    // Vaccinedetail,
   },
   data() {
     return {
@@ -119,6 +124,21 @@ export default {
 };
 </script>
 <style scoped>
+#hide {
+  list-style: none;
+  text-align: left;
+}
+.card {
+  margin-top: 0.2cm;
+  transition: 0.3s;
+  display: flex;
+  border-radius: 1px black;
+  flex-direction: column;
+  /* align-items: center; */
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
 .link {
   text-decoration: none;
 }

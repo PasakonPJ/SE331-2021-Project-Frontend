@@ -11,7 +11,7 @@ const patient_api = axios.create({
 
 export default {
   Delete_comment(id) {
-    return patient_api.delete("/comment/" + id);
+    return patient_api.delete("/comment/only/" + id);
   },
 
   save_comment_patient(A, doctor) {

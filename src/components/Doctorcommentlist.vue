@@ -57,6 +57,7 @@
               class="btn btn-outline-info"
             >
               Delete
+              <!-- Delete {{com.commentedPatient.id}} -->
             </button>
           </div>
         </div>
@@ -115,7 +116,9 @@ export default {
     },
   },
   methods: {
-    Delete_comment() {},
+    deleteComment() {
+      PatientService.Delete_comment().then(() => {});
+    },
     onEdit() {
       this.isEdit = true;
       this.button = false;

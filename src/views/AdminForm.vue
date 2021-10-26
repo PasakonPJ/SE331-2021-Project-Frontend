@@ -8,7 +8,7 @@
       </div>
       <div class="col-3">
         <h1>Add Vaccine</h1>
-        <span>Available: {{countPatient}}</span>
+        <span>Available: {{ countPatient }}</span>
         <Card
           v-for="patient in patients"
           :key="patient.id"
@@ -17,7 +17,7 @@
       </div>
       <div class="col-3">
         <h1>More Doses</h1>
-        <span>Available: {{countPatient}}</span>
+        <span>Available: {{ countPatient }}</span>
         <Card
           v-for="patient in patients"
           :key="patient.id"
@@ -26,7 +26,7 @@
       </div>
       <div class="col-3">
         <h1>Add Role</h1>
-        <span>Available: {{countRole}}</span>
+        <span>Available: {{ countRole }}</span>
         <Role
           v-for="userRole in userRoles"
           :key="userRole.id"
@@ -65,7 +65,7 @@ export default {
         .get_paient_doctor()
         .then((response) => {
           this.patients = response.data;
-          this.countPatient = this.patients.length
+          this.countPatient = this.patients.length;
           this.total_page = response.headers["x-total-count"];
         })
         .catch((error) => {
@@ -75,7 +75,7 @@ export default {
         .get_User()
         .then((response) => {
           this.userRoles = response.data;
-          this.countRole = this.userRoles.length
+          this.countRole = this.userRoles.length;
         })
         .catch((error) => {
           console.log(error);

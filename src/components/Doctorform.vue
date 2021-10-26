@@ -51,9 +51,10 @@
               <div class="form-group row" id="name">
                 <div class="col-sm-2"></div>
                 <label class="col-sm-2 col-form-label">Name:</label>
-                <div class="col-sm-5">
-                  <!-- <input type="text" class="form-control" v-model="name" /> -->
-                  <select v-model="doctor.firstname">
+                {{ patient.doctor.firstname }}
+                <!-- <div class="col-sm-5">
+                  <input type="text" class="form-control" v-model="name" />
+                  <select v-model="doctorid">
                     <option
                       v-for="option in doctors"
                       :value="option.id"
@@ -62,7 +63,7 @@
                       {{ option.firstname }}
                     </option>
                   </select>
-                </div>
+                </div> -->
               </div>
               <div class="form-group row" id="recommend">
                 <div class="col-sm-2"></div>
@@ -96,14 +97,11 @@
 import { watchEffect } from "@vue/runtime-core";
 import api from "@/services/patient_api.js";
 export default {
+  props: ["patient"],
   data() {
     return {
       topic: "",
-      doctor: [
-        {
-          firstname: "",
-        },
-      ],
+      doctorid: 0,
       review: "",
       recommend: "",
       doctors: null,
@@ -111,6 +109,7 @@ export default {
   },
   created() {
     watchEffect(() => {
+      api.patient_login();
       api
         .get_Doctors()
         .then((response) => {
@@ -130,7 +129,7 @@ export default {
       }
       let doctorcomment = {
         topic: this.topic,
-        firstname : this.doctor.firstname,
+        id: this.doctorid,
         recommend: this.recommend,
       };
       this.$emit("comment-submited", doctorcomment);
@@ -238,4 +237,3 @@ export default {
   margin-top: 0.5cm;
 }
 </style>
-

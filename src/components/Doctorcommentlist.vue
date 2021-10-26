@@ -6,22 +6,23 @@
     crossorigin="anonymous"
   />
   <ul style="list-style-type: none">
-    <li v-if="!isEdit">
+    <li>
       <b> The Doctor Topic:</b>{{ com.topic }}
       <br />
       <!-- <b> From doctor:</b>{{ com.doctor.firstname }} -->
       <br />
       <b> Recommend:</b>{{ com.recommend }}
       <br />
+      <br>
     </li>
-    <li v-if="!isEdit">
+    <li v-if="isEdit">
       <div class="form-group row" id="topic">
         <label class="col col-form-label">Topic:</label>
-        <input type="text" class="form-control" :value="com.topic" />
+        <input type="text" class="form-control" v-model="topic" />
       </div>
       <div class="form-group row" id="topic">
-        <label class="col col-form-label">Topic:</label>
-        <textarea type="text" class="form-control" :value="com.recommend" />
+        <label class="col col-form-label">Recommend:</label>
+        <textarea type="text" class="form-control" v-model="recommend" />
       </div>
     </li>
     <br />
@@ -29,35 +30,41 @@
     <li v-if="isDoctor">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div v-if="button" class="col-md-6">
             <button
               @Click="onEdit"
-              v-if="button"
               type="button"
               class="btn btn-outline-info"
             >
               Edit
             </button>
           </div>
-          <div class="col-md-4">
+          <div v-if="!button" class="col-md-6">
             <button
               @Click="editComment"
-              v-if="button"
               type="button"
               class="btn btn-outline-info"
             >
               Confirm
             </button>
           </div>
-          <div class="col-md-4">
+          <div v-if="button" class="col-md-6">
             <button
               @Click="deleteComment"
-              v-if="button"
               type="button"
               class="btn btn-outline-info"
             >
               Delete
               <!-- Delete {{com.commentedPatient.id}} -->
+            </button>
+          </div>
+          <div v-if="!button" class="col-md-6">
+            <button
+              @Click="onEdit"
+              type="button"
+              class="btn btn-outline-info"
+            >
+              Back
             </button>
           </div>
         </div>
@@ -86,21 +93,10 @@ export default {
     return {
       isEdit: false,
       button: true,
+      topic: null,
+      recommend: null
     };
   },
-  // created() {
-  //   watchEffect(() => {
-  //     PatientService
-  //       .get_painet_comment(this.identifind)
-  //       .then((response) => {
-  //         this.comments = response.data;
-  //         this.total_page = response.headers["x-total-count"];
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   });
-  // },
   computed: {
     currentUser() {
       return localStorage.getItem("user");
@@ -120,28 +116,17 @@ export default {
       PatientService.Delete_comment().then(() => {});
     },
     onEdit() {
-      this.isEdit = true;
-      this.button = false;
-      console.log(this.com.id);
-      console.log(this.com.topic);
-      console.log(this.com.recommend);
+      this.isEdit = !this.isEdit
+      this.button = !this.button
     },
     confirm() {},
     editComment() {
-      console.log("yo");
-      PatientService.editComment(
-        this.com.id,
-        this.com.topic,
-        this.com.recommend
-      )
-        .then(() => {
-          console.log("yo");
-          console.log(this.com.id);
-          console.log(this.com.topic);
-          console.log(this.com.recommend);
+      PatientService.editComment(this.com.id, this.topic, this.recommend)
+      .then(() => {
+          window.location.reload();
         })
-        .catch(() => {
-          this.$router.push("NetworkError");
+        .catch((error) => {
+          console.log(error);
         });
     },
   },

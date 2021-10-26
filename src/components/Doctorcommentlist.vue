@@ -9,8 +9,7 @@
     <li>
       <b> The Doctor Topic:</b>{{ com.topic }}
       <br />
-      <b> From doctor:</b>{{ com.id }}
-      <br />
+      
       <b> Recommend:</b>{{ com.recommend }}
       <br />
       <br>
@@ -113,7 +112,7 @@ export default {
   methods: {
     deleteComment() {
       PatientService.Delete_comment(this.com.id).then(() => {
-        this.$router.go();
+        window.location.reload();
       });
     },
     onEdit() {
@@ -124,7 +123,7 @@ export default {
     editComment() {
       PatientService.editComment(this.com.id, this.topic, this.recommend)
       .then(() => {
-          this.$router.go();
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);

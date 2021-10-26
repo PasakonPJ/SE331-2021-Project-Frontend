@@ -66,7 +66,7 @@
                     <ErrorMessage name="email" class="error-feedback" />
                   </div>
                   <label for="image">Image</label>
-                  <UploadImages @changed="handleImages" name="imageUrl" />
+                  <UploadImages @changed="handleImages" name="imageUrl" :max="1"/>
 
                   <br />
                   <div class="form-group" id="Button">

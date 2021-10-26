@@ -11,7 +11,7 @@
       <br />
       <!-- <b> From doctor:</b>{{ com.doctor.firstname }} -->
       <br />
-      <b> Recommend:</b>{{ com.recommend }} {{ com.id }}
+      <b> Recommend:</b>{{ com.recommend }}
       <br />
     </li>
     <li v-if="!isEdit">
@@ -68,9 +68,15 @@
 <script>
 import AuthService from "@/services/AuthService.js";
 import PatientService from "@/services/patient_api.js";
+// import { watchEffect } from "@vue/runtime-core";
+
 export default {
   props: {
     com: {
+      type: Array,
+      required: true,
+    },
+    patient: {
       type: Array,
       required: true,
     },
@@ -81,6 +87,19 @@ export default {
       button: true,
     };
   },
+  // created() {
+  //   watchEffect(() => {
+  //     PatientService
+  //       .get_painet_comment(this.identifind)
+  //       .then((response) => {
+  //         this.comments = response.data;
+  //         this.total_page = response.headers["x-total-count"];
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   });
+  // },
   computed: {
     currentUser() {
       return localStorage.getItem("user");
@@ -96,6 +115,7 @@ export default {
     },
   },
   methods: {
+    Delete_comment() {},
     onEdit() {
       this.isEdit = true;
       this.button = false;

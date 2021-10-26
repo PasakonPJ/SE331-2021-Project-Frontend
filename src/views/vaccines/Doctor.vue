@@ -12,7 +12,7 @@
       <div class="col-md-4" v-for="com in comments" :key="com.id">
         <div class="card">
           <div class="card-body">
-            <Doctorcommentlist :com="com" />
+            <Doctorcommentlist :com="com" :patient="patient" />
           </div>
         </div>
       </div>
@@ -25,6 +25,7 @@ import Doctorform from "@/components/Doctorform.vue";
 import Doctorcommentlist from "@/components/Doctorcommentlist.vue";
 import { watchEffect } from "@vue/runtime-core";
 import api from "@/services/patient_api.js";
+import AuthService from "@/services/AuthService.js";
 export default {
   name: "Doctorcomment",
   inject: ["Global_Store"],
@@ -48,12 +49,27 @@ export default {
         .get_painet_comment(this.identifind)
         .then((response) => {
           this.comments = response.data;
+          console.log(this.comments);
           this.total_page = response.headers["x-total-count"];
         })
         .catch((error) => {
           console.log(error);
         });
     });
+  },
+  computed: {
+    currentUser() {
+      return localStorage.getItem("user");
+    },
+    isAdmin() {
+      return AuthService.hasRoles("ROLE_ADMIN");
+    },
+    isDoctor() {
+      return AuthService.hasRoles("ROLE_DOCTOR");
+    },
+    isPatient() {
+      return AuthService.hasRoles("ROLE_PATIENT");
+    },
   },
   methods: {
     addcomment(allcomment) {

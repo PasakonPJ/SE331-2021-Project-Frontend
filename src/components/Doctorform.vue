@@ -35,7 +35,7 @@
         </div>
       </div>
     </section>
-    <div class="row gutters-sm">
+    <div class="row gutters-sm" v-if="isDoctor">
       <div class="col-md">
         <div class="card mb-3">
           <div class="card-body">

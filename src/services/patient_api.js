@@ -10,6 +10,10 @@ const patient_api = axios.create({
 //    method(id_panient,(json = id doctor,topic,recommend))
 
 export default {
+  Delete_comment(id) {
+    return patient_api.delete("/comment/" + id);
+  },
+
   save_comment_patient(A, doctor) {
     console.log(doctor);
     return patient_api.post("/comment/" + A, {

@@ -151,6 +151,7 @@ export default {
         return;
       }
       let doctorcomment = {
+        id: this.patient.doctor.id,
         topic: this.topic,
 
         id: this.patient.doctor.id,

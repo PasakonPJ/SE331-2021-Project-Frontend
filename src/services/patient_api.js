@@ -80,18 +80,16 @@ export default {
       role: [user],
     });
   },
-  // uploadFile(file) {
-  //   let formData = new FormData();
-  //   formData.append("file", file);
-  //   return patient_api.post("/uploadFile", formData, {
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   });
-  // },
-  // doctor_login(user) {
-  //   return patient_api.put("/user/" + id, {
-  //     role: [user],
-  //   });
-  // },
+
+  editComment(id, topic, recommend){
+    console.log(topic);
+    return patient_api.put("/comment/edit", {
+      id: id,
+      topic: topic,
+      recommend: recommend,
+    })
+  }
+
+
+
 };

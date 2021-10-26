@@ -41,10 +41,13 @@
           <div class="card-body">
             <form @submit.prevent="onSubmit">
               <h1 id="toptext">Leave a doctor’s comments</h1>
-              <hr>
+              <hr />
               <div class="form-group row" id="name">
                 <div class="col-sm-2"></div>
-              <h3>Dr. {{patient.doctor.firstname}} {{patient.doctor.lastname}}</h3>
+                <h3>
+                  Dr. {{ patient.doctor.firstname }}
+                  {{ patient.doctor.lastname }}
+                </h3>
               </div>
               <div class="form-group row" id="topic">
                 <div class="col-sm-2"></div>
@@ -53,13 +56,10 @@
                   <input type="text" class="form-control" v-model="topic" />
                 </div>
               </div>
-
+         
+              <!-- 
               <div class="form-group row" id="name">
-                <div class="col-sm-2"></div>
-                <label class="col-sm-2 col-form-label">Name:</label>
-                {{ patient.doctor.firstname }}
-                <!-- <div class="col-sm-5">
-                  <input type="text" class="form-control" v-model="name" />
+                <div class="col-sm-5">
                   <select v-model="doctorid">
                     <option
                       v-for="option in doctors"
@@ -69,8 +69,8 @@
                       {{ option.firstname }}
                     </option>
                   </select>
-                </div> -->
-              </div>
+                </div>
+              </div> -->
 
               <div class="form-group row" id="recommend">
                 <div class="col-sm-2"></div>
@@ -82,7 +82,7 @@
                     v-model="recommend"
                   />
                 </div>
-              </div> 
+              </div>
               <br />
               <div class="row">
                 <div class="col-sm-7"></div>
@@ -102,8 +102,9 @@
 </template>
 <script>
 import AuthService from "@/services/AuthService.js";
+import api from "@/services/patient_api.js";
+import { watchEffect } from "@vue/runtime-core";
 export default {
-
   props: ["patient"],
   data() {
     return {
@@ -111,7 +112,7 @@ export default {
       doctorid: 0,
 
       review: "",
-      recommend: ""
+      recommend: "",
     };
   },
 
@@ -128,7 +129,7 @@ export default {
           console.log(error);
         });
     });
-
+  },
   computed: {
     currentUser() {
       return localStorage.getItem("user");
@@ -142,7 +143,6 @@ export default {
     isPatient() {
       return AuthService.hasRoles("ROLE_PATIENT");
     },
-
   },
   methods: {
     onSubmit() {
@@ -153,7 +153,7 @@ export default {
       let doctorcomment = {
         topic: this.topic,
 
-        id: this.doctorid,
+        id: this.patient.doctor.id,
 
         recommend: this.recommend,
       };
@@ -165,11 +165,10 @@ export default {
 };
 </script>
 <style scoped>
-h3{
+h3 {
   text-align: right;
   display: inline;
   text-transform: uppercase;
-
 }
 .link {
   text-decoration: none;

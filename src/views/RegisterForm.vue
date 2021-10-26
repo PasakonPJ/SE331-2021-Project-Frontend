@@ -66,11 +66,11 @@
                     <ErrorMessage name="email" class="error-feedback" />
                   </div>
                   <label for="image">Image</label>
-                  <UploadImages @changed="handleImages" name="imageUrl"/>
+                  <UploadImages @changed="handleImages" name="imageUrl" />
 
                   <br />
                   <div class="form-group" id="Button">
-                    <button 
+                    <button
                       type="submit"
                       class="btn btn-outline-info btn-block"
                       :disabled="loading"
@@ -146,7 +146,7 @@ export default {
         .required("Password is required!")
         .min(6, "Must be at least 6 characters!")
         .max(40, "Must be maximum 40 characters!"),
-      imageurl: yup.string()
+      imageurl: yup.string(),
     });
 
     return {
@@ -154,7 +154,7 @@ export default {
       loading: false,
       message: "",
       schema,
-      imageurl:"",
+      imageurl: "",
       files: [],
     };
   },
@@ -170,13 +170,13 @@ export default {
       // console.log(user)
       Promise.all(
         this.files.map((file) => {
-          console.log(file)
+          console.log(file);
           return AuthService.uploadFile(file);
         })
       ).then((response) => {
         user.imageurl = response.map((r) => r.data);
-        user.imageurl =  user.imageurl[0];
-        console.log(user.imageurl)
+        user.imageurl = user.imageurl[0];
+        console.log(user.imageurl);
         AuthService.saveUser(user)
           .then(() => {
             this.message = "";
@@ -189,9 +189,9 @@ export default {
           });
       });
     },
-     handleImages(files) {
-      this.files = files
-    }
+    handleImages(files) {
+      this.files = files;
+    },
   },
 };
 </script>

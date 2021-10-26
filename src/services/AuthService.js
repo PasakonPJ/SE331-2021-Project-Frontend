@@ -39,7 +39,7 @@ export default {
       password: user.password,
       firstname: user.firstname,
       lastname: user.lastname,
-      imageurl: user.imageurl
+      imageurl: user.imageurl,
     });
   },
   getUser() {

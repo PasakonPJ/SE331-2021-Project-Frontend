@@ -2,7 +2,6 @@
   <br /><br />
   <Static :covid="covid" />
   <br /><br />
-  {{ Global_Store.currentUser }}
   <div v-if="isAdmin">
     <h1>List of People</h1>
     <div class="container">

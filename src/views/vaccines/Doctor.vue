@@ -87,7 +87,7 @@ export default {
           group: "ko",
           image: "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif",
         });
-        window.location.reload();
+        this.$router.go()
       });
     },
   },

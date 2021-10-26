@@ -113,7 +113,7 @@ export default {
   methods: {
     deleteComment() {
       PatientService.Delete_comment(this.com.id).then(() => {
-         window.location.reload();
+        this.$router.go();
       });
     },
     onEdit() {
@@ -124,7 +124,7 @@ export default {
     editComment() {
       PatientService.editComment(this.com.id, this.topic, this.recommend)
       .then(() => {
-          window.location.reload();
+          this.$router.go();
         })
         .catch((error) => {
           console.log(error);

@@ -66,11 +66,12 @@
                     <ErrorMessage name="email" class="error-feedback" />
                   </div>
                   <label for="image">Image</label>
-                  <UploadImages />
+                  <UploadImages @changed="handleImages" name="imageUrl" />
 
                   <br />
                   <div class="form-group" id="Button">
                     <button
+                      type="submit"
                       class="btn btn-outline-info btn-block"
                       :disabled="loading"
                     >
@@ -107,7 +108,7 @@ import * as yup from "yup";
 import UploadImages from "vue-upload-drop-images";
 // eslint-disable-next-line
 import AuthService from "@/services/AuthService.js";
-
+// import api from "@/services/patient_api.js";
 export default {
   name: "Register",
   components: {
@@ -145,6 +146,7 @@ export default {
         .required("Password is required!")
         .min(6, "Must be at least 6 characters!")
         .max(40, "Must be maximum 40 characters!"),
+      imageurl: yup.string(),
     });
 
     return {
@@ -152,6 +154,8 @@ export default {
       loading: false,
       message: "",
       schema,
+      imageurl: "",
+      files: [],
     };
   },
   mounted() {
@@ -161,17 +165,32 @@ export default {
   },
   methods: {
     // eslint-disable-next-line
+
     handleRegister(user) {
-      AuthService.saveUser(user)
-        .then(() => {
-          this.message = "";
-          this.successful = true;
-          this.loading = true;
-          this.$router.push("/login");
+      // console.log(user)
+      Promise.all(
+        this.files.map((file) => {
+          console.log(file);
+          return AuthService.uploadFile(file);
         })
-        .catch(() => {
-          this.$router.push("NetworkError");
-        });
+      ).then((response) => {
+        user.imageurl = response.map((r) => r.data);
+        user.imageurl = user.imageurl[0];
+        console.log(user.imageurl);
+        AuthService.saveUser(user)
+          .then(() => {
+            this.message = "";
+            this.successful = true;
+            this.loading = true;
+            this.$router.push("/login");
+          })
+          .catch(() => {
+            this.$router.push("NetworkError");
+          });
+      });
+    },
+    handleImages(files) {
+      this.files = files;
     },
   },
 };

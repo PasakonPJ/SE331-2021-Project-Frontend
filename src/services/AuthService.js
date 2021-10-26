@@ -11,7 +11,7 @@ export default {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         GStore.currentUser = response.data.user;
-        console.log(response.data)
+        console.log(response.data);
         return Promise.resolve(response.data);
       })
       .catch((error) => {
@@ -23,6 +23,15 @@ export default {
     localStorage.removeItem("user");
     GStore.currentUser = null;
   },
+  uploadFile(file) {
+    let formData = new FormData();
+    formData.append("file", file);
+    return apiClient.post("/uploadFile", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
   saveUser(user) {
     return apiClient.post("/signup", {
       username: user.username,
@@ -30,6 +39,7 @@ export default {
       password: user.password,
       firstname: user.firstname,
       lastname: user.lastname,
+      imageurl: user.imageurl,
     });
   },
   getUser() {

@@ -6,9 +6,10 @@
     crossorigin="anonymous"
   />
   <Doctorform @comment-submited="addcomment" :patient="patient" />
-  <div class="container">
+
+  <div class="container-fuild">
     <div class="row">
-      <div class="col-sm-4" v-for="com in comments" :key="com.id">
+      <div class="col-md-4" v-for="com in comments" :key="com.id">
         <div class="card">
           <div class="card-body">
             <Doctorcommentlist :com="com" />
@@ -38,7 +39,7 @@ export default {
     return {
       comments: [],
       identifind: this.patient.id,
-      comments2: []
+      comments2: [],
     };
   },
   created() {
@@ -56,18 +57,20 @@ export default {
   },
   methods: {
     addcomment(allcomment) {
-      setTimeout(() => {
-        console.log(allcomment)
-        this.comments.push(allcomment);
-        this.$flashMessage.remove("ko");
-      }, 1200);
-      this.$flashMessage.show({
-        type: "info",
-        title: "uploading suggestion",
-        text: `we're uploading your suggestion.`,
-        contentClass: "text",
-        group: "ko",
-        image: "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif",
+      api.save_comment_patient(this.identifind, allcomment).then(() => {
+        setTimeout(() => {
+          console.log(allcomment);
+          this.comments.push(allcomment);
+          this.$flashMessage.remove("ko");
+        }, 1200);
+        this.$flashMessage.show({
+          type: "info",
+          title: "uploading suggestion",
+          text: `we're uploading your suggestion.`,
+          contentClass: "text",
+          group: "ko",
+          image: "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif",
+        });
       });
     },
   },
@@ -75,18 +78,19 @@ export default {
 </script>
 <style scoped>
 .card {
-  align-items: center;
+  /* align-items: center; */
   margin-top: 0.2cm;
   transition: 0.3s;
-  display: flex;
+  /* display: flex; */
   border-radius: 1px black;
   flex-direction: column;
-  align-items: center;
+  text-align: left;
+  /* align-items: center; */
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-.col-sm-4 {
+.col-md-4 {
   margin-top: 0.2cm;
 }
 </style>

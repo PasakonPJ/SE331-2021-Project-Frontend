@@ -108,7 +108,7 @@ export default {
                 console.log(this.biguser.id);
                 this.$router.push({
                   name: "list",
-                  params: { id: this.biguser.id }
+                  params: { id: this.biguser.id },
                 });
               });
           } else {

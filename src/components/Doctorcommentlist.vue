@@ -6,6 +6,7 @@
     crossorigin="anonymous"
   />
   <ul style="list-style-type: none">
+
     <li v-if="!isEdit">
       <b> The Doctor Topic:</b>{{ com.topic }}
       <br />
@@ -33,6 +34,10 @@
       <button @Click="onEdit" v-if="button" type="button" class="btn btn-outline-info">Edit</button>
       <button @Click="editComment" v-if="button" type="button" class="btn btn-outline-info">Confirm</button>
     </li>
+
+    <li v-if="com"><b> The Doctor Topic: </b>{{ com.topic }}</li>
+    <li v-if="com"><b> Recommend:</b> {{ com.recommend }}</li>
+
   </ul>
 </template>
 

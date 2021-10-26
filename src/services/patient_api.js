@@ -81,15 +81,12 @@ export default {
     });
   },
 
-  editComment(id, topic, recommend){
+  editComment(id, topic, recommend) {
     console.log(topic);
     return patient_api.put("/comment/edit", {
       id: id,
       topic: topic,
       recommend: recommend,
-    })
-  }
-
-
-
+    });
+  },
 };

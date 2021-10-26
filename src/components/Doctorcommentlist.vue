@@ -6,13 +6,12 @@
     crossorigin="anonymous"
   />
   <ul style="list-style-type: none">
-
     <li v-if="!isEdit">
       <b> The Doctor Topic:</b>{{ com.topic }}
       <br />
       <!-- <b> From doctor:</b>{{ com.doctor.firstname }} -->
       <br />
-      <b> Recommend:</b>{{ com.recommend }} {{com.id}}
+      <b> Recommend:</b>{{ com.recommend }} {{ com.id }}
       <br />
     </li>
     <li v-if="!isEdit">
@@ -22,22 +21,47 @@
       </div>
       <div class="form-group row" id="topic">
         <label class="col col-form-label">Topic:</label>
-          <textarea
-                    type="text"
-                    class="form-control"
-                    :value="com.recommend"
-                  />
+        <textarea type="text" class="form-control" :value="com.recommend" />
       </div>
     </li>
-    <br>
+    <br />
+
     <li v-if="isDoctor">
-      <button @Click="onEdit" v-if="button" type="button" class="btn btn-outline-info">Edit</button>
-      <button @Click="editComment" v-if="button" type="button" class="btn btn-outline-info">Confirm</button>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <button
+              @Click="onEdit"
+              v-if="button"
+              type="button"
+              class="btn btn-outline-info"
+            >
+              Edit
+            </button>
+          </div>
+          <div class="col-md-4">
+            <button
+              @Click="editComment"
+              v-if="button"
+              type="button"
+              class="btn btn-outline-info"
+            >
+              Confirm
+            </button>
+          </div>
+          <div class="col-md-4">
+            <button
+              @Click="deleteComment"
+              v-if="button"
+              type="button"
+              class="btn btn-outline-info"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </li>
-
-    <li v-if="com"><b> The Doctor Topic: </b>{{ com.topic }}</li>
-    <li v-if="com"><b> Recommend:</b> {{ com.recommend }}</li>
-
   </ul>
 </template>
 
@@ -55,7 +79,6 @@ export default {
     return {
       isEdit: false,
       button: true,
-
     };
   },
   computed: {
@@ -80,12 +103,14 @@ export default {
       console.log(this.com.topic);
       console.log(this.com.recommend);
     },
-    confirm(){
-
-    },
+    confirm() {},
     editComment() {
       console.log("yo");
-      PatientService.editComment(this.com.id, this.com.topic,this.com.recommend)
+      PatientService.editComment(
+        this.com.id,
+        this.com.topic,
+        this.com.recommend
+      )
         .then(() => {
           console.log("yo");
           console.log(this.com.id);
@@ -97,6 +122,15 @@ export default {
         });
     },
   },
-  
 };
 </script>
+<style scoped>
+button {
+  width: 100%;
+  border: 1px;
+  border: 1px solid rgb(10, 60, 84);
+}
+/* #Button {
+  padding: 0px,10px,0px,10px;
+} */
+</style>

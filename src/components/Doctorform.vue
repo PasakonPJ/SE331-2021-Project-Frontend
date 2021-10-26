@@ -56,7 +56,7 @@
                   <input type="text" class="form-control" v-model="topic" />
                 </div>
               </div>
-         
+
               <!-- 
               <div class="form-group row" id="name">
                 <div class="col-sm-5">
@@ -153,9 +153,6 @@ export default {
       let doctorcomment = {
         id: this.patient.doctor.id,
         topic: this.topic,
-
-        id: this.patient.doctor.id,
-
         recommend: this.recommend,
       };
       this.$emit("comment-submited", doctorcomment);

@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid register">
     <div class="row">
-      <div class="col-3 register-left">
+      <div class="col-4 register-left">
         <img src="../assets/chickgoya.jpg" alt="" />
         <h3>Welcome</h3>
         <p>Doctor !!!</p>
       </div>
-      <div class="col-3">
+      <div class="col-4">
         <h1>Add Vaccine</h1>
         <span>Available: {{ countPatient }}</span>
         <Card
@@ -15,7 +15,7 @@
           :patient="patient"
         />
       </div>
-      <div class="col-3">
+      <!-- <div class="col-3">
         <h1>More Doses</h1>
         <span>Available: {{ countPatient }}</span>
         <Card
@@ -23,8 +23,8 @@
           :key="patient.id"
           :patient="patient"
         />
-      </div>
-      <div class="col-3">
+      </div> -->
+      <div class="col-4">
         <h1>Add Role</h1>
         <span>Available: {{ countRole }}</span>
         <Role

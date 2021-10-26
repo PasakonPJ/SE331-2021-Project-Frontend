@@ -88,7 +88,7 @@
                 <div class="col-sm-7"></div>
                 &nbsp;&nbsp;
                 <div class="col-sm-2">
-                  <button type="submit" class="btn btn-primary mb-2">
+                  <button type="submit" class="btn btn-primary mb-2" >
                     Confirm identity
                   </button>
                 </div>

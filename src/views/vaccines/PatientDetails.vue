@@ -40,6 +40,13 @@
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
               <img
+              
+                :src= patient.imageurl
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+              />
+              <!-- <img
                 v-if="assignuser"
                 :src="assignuser"
                 alt="Admin"
@@ -61,7 +68,7 @@
                 class="rounded-circle"
                 width="220"
                 height="200"
-              />
+              /> -->
               <div class="mt-3">
                 <h4>{{ patient.firstname }} {{ patient.lastname }}</h4>
               </div>

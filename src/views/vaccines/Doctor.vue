@@ -5,7 +5,7 @@
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
     crossorigin="anonymous"
   />
-  <Doctorform @comment-submited="addcomment" />
+  <Doctorform @comment-submited="addcomment" :patient="patient" />
   <div class="container">
     <div class="row">
       <div class="col-sm-4" v-for="com in comments" :key="com.id">

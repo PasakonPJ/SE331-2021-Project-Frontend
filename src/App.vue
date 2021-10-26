@@ -7,7 +7,7 @@
     group="ko"
     style="text-align: center"
   />
-  <div class="menu-wrap" v-if="!isROLE_PATIENT">
+  <div class="menu-wrap" v-if="!isPatient">
     <input type="checkbox" class="toggler" />
     <div class="hamburger"><div></div></div>
     <div class="menu">
@@ -36,10 +36,10 @@
         </li>
       </ul>
       <ul v-if="Global_Store.currentUser" class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li v-if="isDoctor" class="nav-item">
           <router-link to="/profile" class="nav-link">
             <font-awesome-icon icon="user" />
-            {{ Global_Store.currentUser.firstname }}
+            Manage
           </router-link>
         </li>
         <li v-if="isAdmin" class="nav-item">
@@ -75,7 +75,10 @@ export default {
     isAdmin() {
       return AuthService.hasRoles("ROLE_ADMIN");
     },
-    isROLE_PATIENT() {
+    isDoctor() {
+      return AuthService.hasRoles("ROLE_DOCTOR");
+    },
+    isPatient() {
       return AuthService.hasRoles("ROLE_PATIENT");
     },
   },

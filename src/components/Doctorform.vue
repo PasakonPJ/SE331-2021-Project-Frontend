@@ -53,6 +53,25 @@
                   <input type="text" class="form-control" v-model="topic" />
                 </div>
               </div>
+
+              <div class="form-group row" id="name">
+                <div class="col-sm-2"></div>
+                <label class="col-sm-2 col-form-label">Name:</label>
+                {{ patient.doctor.firstname }}
+                <!-- <div class="col-sm-5">
+                  <input type="text" class="form-control" v-model="name" />
+                  <select v-model="doctorid">
+                    <option
+                      v-for="option in doctors"
+                      :value="option.id"
+                      :key="option.id"
+                    >
+                      {{ option.firstname }}
+                    </option>
+                  </select>
+                </div> -->
+              </div>
+
               <div class="form-group row" id="recommend">
                 <div class="col-sm-2"></div>
                 <label class="col-sm-2 col-form-label">Recommend:</label>
@@ -84,14 +103,32 @@
 <script>
 import AuthService from "@/services/AuthService.js";
 export default {
-props: ["patient"],
+
+  props: ["patient"],
   data() {
     return {
       topic: "",
+      doctorid: 0,
+
       review: "",
       recommend: ""
     };
   },
+
+  created() {
+    watchEffect(() => {
+      api.patient_login();
+      api
+        .get_Doctors()
+        .then((response) => {
+          this.doctors = response.data;
+          this.total_page = response.headers["x-total-count"];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+
   computed: {
     currentUser() {
       return localStorage.getItem("user");
@@ -105,6 +142,7 @@ props: ["patient"],
     isPatient() {
       return AuthService.hasRoles("ROLE_PATIENT");
     },
+
   },
   methods: {
     onSubmit() {
@@ -114,6 +152,9 @@ props: ["patient"],
       }
       let doctorcomment = {
         topic: this.topic,
+
+        id: this.doctorid,
+
         recommend: this.recommend,
       };
       this.$emit("comment-submited", doctorcomment);
@@ -226,4 +267,3 @@ h3{
   margin-top: 0.5cm;
 }
 </style>
-

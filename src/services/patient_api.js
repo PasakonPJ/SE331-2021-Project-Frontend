@@ -10,6 +10,14 @@ const patient_api = axios.create({
 //    method(id_panient,(json = id doctor,topic,recommend))
 
 export default {
+  save_comment_patient(A, doctor) {
+    console.log(doctor);
+    return patient_api.post("/comment/" + A, {
+      id: doctor.id,
+      topic: doctor.topic,
+      recommend: doctor.recommend,
+    });
+  },
   get_all_patient(page, limit) {
     return patient_api.get("/patients?_limit=" + limit + "&_page=" + page);
   },
@@ -27,28 +35,28 @@ export default {
     return patient_api.get("/patients/" + id);
   },
   patient_login(user) {
-    return patient_api.get("/patients/profile/"+user);
+    return patient_api.get("/patients/profile/" + user);
   },
   doctor_login(user) {
-    return patient_api.get("/doctors/profile/"+user);
+    return patient_api.get("/doctors/profile/" + user);
   },
   ///doctor of patient
   get_patient_doctor() {
     return patient_api.get("/patients/doctor");
   },
 
-  get_doctor(id){
+  get_doctor(id) {
     return patient_api.get("/doctors/" + id);
   },
-  
+
   doctor_patient(username) {
-    return patient_api.post("/doctors/mypatient",{
-      username: username
+    return patient_api.post("/doctors/mypatient", {
+      username: username,
     });
   },
 
   doctor_patientt(username) {
-    return patient_api.get("/doctors/" + username)
+    return patient_api.get("/doctors/" + username);
   },
 
   get_Doctors() {
@@ -64,7 +72,7 @@ export default {
   get_user_id(id) {
     return patient_api.get("/user/" + id);
   },
-  get_painet_comment(id){
+  get_painet_comment(id) {
     return patient_api.get("/comment/" + id);
   },
   saveRole(user, id) {
@@ -72,7 +80,15 @@ export default {
       role: [user],
     });
   },
-
+  // uploadFile(file) {
+  //   let formData = new FormData();
+  //   formData.append("file", file);
+  //   return patient_api.post("/uploadFile", formData, {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   });
+  // },
   // doctor_login(user) {
   //   return patient_api.put("/user/" + id, {
   //     role: [user],

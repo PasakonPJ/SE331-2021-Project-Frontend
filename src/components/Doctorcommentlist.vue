@@ -9,7 +9,7 @@
     <li>
       <b> The Doctor Topic:</b>{{ com.topic }}
       <br />
-      <!-- <b> From doctor:</b>{{ com.doctor.firstname }} -->
+      <b> From doctor:</b>{{ com.id }}
       <br />
       <b> Recommend:</b>{{ com.recommend }}
       <br />
@@ -54,8 +54,7 @@
               type="button"
               class="btn btn-outline-info"
             >
-              Delete
-              <!-- Delete {{com.commentedPatient.id}} -->
+              Delete 
             </button>
           </div>
           <div v-if="!button" class="col-md-6">
@@ -113,7 +112,9 @@ export default {
   },
   methods: {
     deleteComment() {
-      PatientService.Delete_comment().then(() => {});
+      PatientService.Delete_comment(this.com.id).then(() => {
+         window.location.reload();
+      });
     },
     onEdit() {
       this.isEdit = !this.isEdit

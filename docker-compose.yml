@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+    web:
+        image: "konginwza/331-lab12:latest"
+        ports: 
+            - 8001:80
+    

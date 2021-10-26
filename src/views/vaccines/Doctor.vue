@@ -6,7 +6,9 @@
     crossorigin="anonymous"
   />
   <Doctorform @comment-submited="addcomment" :patient="patient" />
+
   <div class="container-fuild">
+
     <div class="row">
       <div class="col-md-4" v-for="com in comments" :key="com.id">
         <div class="card">

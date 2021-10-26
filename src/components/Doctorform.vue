@@ -40,7 +40,12 @@
         <div class="card mb-3">
           <div class="card-body">
             <form @submit.prevent="onSubmit">
-              <h3 id="toptext">Leave a doctor’s comments</h3>
+              <h1 id="toptext">Leave a doctor’s comments</h1>
+              <hr>
+              <div class="form-group row" id="name">
+                <div class="col-sm-2"></div>
+              <h3>Dr. {{patient.doctor.firstname}} {{patient.doctor.lastname}}</h3>
+              </div>
               <div class="form-group row" id="topic">
                 <div class="col-sm-2"></div>
                 <label class="col-sm-2 col-form-label">Topic:</label>
@@ -48,6 +53,7 @@
                   <input type="text" class="form-control" v-model="topic" />
                 </div>
               </div>
+
               <div class="form-group row" id="name">
                 <div class="col-sm-2"></div>
                 <label class="col-sm-2 col-form-label">Name:</label>
@@ -65,6 +71,7 @@
                   </select>
                 </div> -->
               </div>
+
               <div class="form-group row" id="recommend">
                 <div class="col-sm-2"></div>
                 <label class="col-sm-2 col-form-label">Recommend:</label>
@@ -75,7 +82,7 @@
                     v-model="recommend"
                   />
                 </div>
-              </div>
+              </div> 
               <br />
               <div class="row">
                 <div class="col-sm-7"></div>
@@ -94,19 +101,20 @@
   </div>
 </template>
 <script>
-import { watchEffect } from "@vue/runtime-core";
-import api from "@/services/patient_api.js";
+import AuthService from "@/services/AuthService.js";
 export default {
+
   props: ["patient"],
   data() {
     return {
       topic: "",
       doctorid: 0,
+
       review: "",
-      recommend: "",
-      doctors: null,
+      recommend: ""
     };
   },
+
   created() {
     watchEffect(() => {
       api.patient_login();
@@ -120,27 +128,49 @@ export default {
           console.log(error);
         });
     });
+
+  computed: {
+    currentUser() {
+      return localStorage.getItem("user");
+    },
+    isAdmin() {
+      return AuthService.hasRoles("ROLE_ADMIN");
+    },
+    isDoctor() {
+      return AuthService.hasRoles("ROLE_DOCTOR");
+    },
+    isPatient() {
+      return AuthService.hasRoles("ROLE_PATIENT");
+    },
+
   },
   methods: {
     onSubmit() {
-      if (this.topic === "" || this.firstname === "" || this.recommend === "") {
+      if (this.topic === "" || this.recommend === "") {
         alert("Comment is incomplete. Please full");
         return;
       }
       let doctorcomment = {
         topic: this.topic,
+
         id: this.doctorid,
+
         recommend: this.recommend,
       };
       this.$emit("comment-submited", doctorcomment);
       this.topic = "";
-      this.this.doctor.firstname = "";
       this.recommend = "";
     },
   },
 };
 </script>
 <style scoped>
+h3{
+  text-align: right;
+  display: inline;
+  text-transform: uppercase;
+
+}
 .link {
   text-decoration: none;
 }

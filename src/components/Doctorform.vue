@@ -113,6 +113,7 @@ props: ["patient"],
         return;
       }
       let doctorcomment = {
+        id: this.patient.doctor.id,
         topic: this.topic,
         recommend: this.recommend,
       };
